@@ -35,6 +35,10 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
     // endregion
 
+    //region Firebase - Core
+    implementation 'com.google.firebase:firebase-database-ktx:19.3.0'
+    //endregion
+
     // region Android - AppCompat
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     // endregion

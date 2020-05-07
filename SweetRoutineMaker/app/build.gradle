@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -34,6 +36,10 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
     // endregion
+
+    //region Firebase Analytics
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    //endregion
 
     //region Firebase - Core
     implementation 'com.google.firebase:firebase-database-ktx:19.3.0'

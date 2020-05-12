@@ -1,6 +1,5 @@
 package fr.iutbourg.sweetroutinemaker.ui.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,36 +11,34 @@ import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.FirebaseDatabase
 import fr.iutbourg.sweetroutinemaker.R
-import fr.iutbourg.sweetroutinemaker.data.model.ActivityTodo
-import fr.iutbourg.sweetroutinemaker.data.model.TodoItem
-import fr.iutbourg.sweetroutinemaker.data.model.TodoList
+import fr.iutbourg.sweetroutinemaker.data.model.ListActivityTodo
 import fr.iutbourg.sweetroutinemaker.extension.applyRequire
 import fr.iutbourg.sweetroutinemaker.extension.initRecyclerView
-import fr.iutbourg.sweetroutinemaker.extension.notifyAllOnDataSetChanged
-import fr.iutbourg.sweetroutinemaker.extension.onValidationTodoItem
+import fr.iutbourg.sweetroutinemaker.ui.adapter.ActivityListAdapter
 import fr.iutbourg.sweetroutinemaker.ui.adapter.TodoListAdapter
+import fr.iutbourg.sweetroutinemaker.ui.viewmodel.ActivityListViewModel
 import fr.iutbourg.sweetroutinemaker.ui.viewmodel.TodoListViewModel
 import kotlinx.android.synthetic.main.fragment_shopping_list.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TodoListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class TodoListFragment(private val todoList: TodoList) : Fragment(), UserActionOnList {
 
-    private lateinit var todoListViewModel: TodoListViewModel
-    private lateinit var todoListAdapter: TodoListAdapter
-    private var activityTodoList = todoList.items
+class ActivityListFragment(listActivity: ListActivityTodo) : Fragment() {
+
+    private lateinit var activityListViewModel: ActivityListViewModel
+    private lateinit var activityListAdapter: ActivityListAdapter
+    private var activityTodoList = listActivity.activities
     val db = FirebaseDatabase.getInstance().reference
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         activity?.run {
-            todoListViewModel = ViewModelProvider(
+            activityListViewModel = ViewModelProvider(
                 this,
                 TodoListViewModel
             ).get()
@@ -51,24 +48,13 @@ class TodoListFragment(private val todoList: TodoList) : Fragment(), UserActionO
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        todoListAdapter = TodoListAdapter(this)
-        shoppingRecyclerView.applyRequire(todoListAdapter, LinearLayoutManager(requireContext()))
-        activityTodoList!!.initRecyclerView(todoListViewModel, todoListAdapter)
+        activityListAdapter = ActivityListAdapter()
+        shoppingRecyclerView.applyRequire(activityListAdapter, LinearLayoutManager(requireContext()))
+        activityTodoList!!.initRecyclerView(activityListViewModel, activityListAdapter)
             .observe(viewLifecycleOwner, Observer {
-                if(it.isNotEmpty()){
-                    todoListAdapter.submitList(it)
+                if (it.isNotEmpty()) {
+                    activityListAdapter.submitList(it)
                 }
             })
     }
-
-
-    override fun updateAllOnValidation(position: Int) {
-        shoppingRecyclerView.onValidationTodoItem(position) {
-            (adapter as TodoListAdapter).notifyAllOnDataSetChanged()
-        }
-    }
-}
-
-interface UserActionOnList {
-    fun updateAllOnValidation(position: Int)
 }

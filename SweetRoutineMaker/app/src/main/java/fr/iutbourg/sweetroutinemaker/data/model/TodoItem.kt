@@ -1,5 +1,14 @@
 package fr.iutbourg.sweetroutinemaker.data.model
 
+import android.util.Base64
+
+data class Picture(
+    val namePicture: String,
+    val itemBase64: Base64,
+    val tags: List<String>
+)
+
+
 data class TodoItem(
     val todoItemB64 : String?,
     val todoItemLabel : String
@@ -13,7 +22,7 @@ data class ActivityTodo(
     val activityTodoBase64: String?,
     val activityTodoLabel: String,
     val options: ListOptions,
-    val todoList: TodoList?
+    val todoList: List<TodoList>?
 )
 
 data class TodoList(
@@ -32,6 +41,7 @@ data class ListOptions(
     val targetActivityLabel: String,
     val openOption: List<TodoOption>
 )
+
 
 enum class RESTRICTIONS(restriction: Int) {
     RESTRICTED(0),

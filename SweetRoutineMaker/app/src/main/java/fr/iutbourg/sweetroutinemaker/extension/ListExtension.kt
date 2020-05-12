@@ -1,5 +1,7 @@
 package fr.iutbourg.sweetroutinemaker.extension
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import fr.iutbourg.sweetroutinemaker.data.model.TodoItem
 import fr.iutbourg.sweetroutinemaker.ui.adapter.BaseItemAdapter
 import fr.iutbourg.sweetroutinemaker.ui.adapter.viewholder.BaseItemViewHolder
@@ -33,12 +35,14 @@ fun List<TodoItem>.filterByNameDesc(): List<TodoItem> {
     }
 }
 
-fun <T, R : BaseItemViewHolder<T>> List<T>.initRecyclerView(itemViewModel: BaseViewModel, itemListAdapter: BaseItemAdapter<T, R>){
-    if(this.isEmpty()){
+fun <Model, Holder : BaseItemViewHolder<Model>> List<Model>.initRecyclerView(itemViewModel: BaseViewModel<Model>, itemListAdapter: BaseItemAdapter<Model, Holder>): LiveData<List<Model>> {
+    return if(this.isEmpty()){
         itemViewModel.getItemList()
     }
-    else
+    else {
         itemListAdapter.submitList(this)
+        MutableLiveData()
+    }
 }
 
 

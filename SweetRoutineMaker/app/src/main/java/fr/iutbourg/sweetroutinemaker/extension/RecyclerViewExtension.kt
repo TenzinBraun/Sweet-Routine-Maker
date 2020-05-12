@@ -15,11 +15,11 @@ fun RecyclerView.onValidationTodoItem(
     return block()
 }
 
-fun <T, R: BaseItemViewHolder<T>> BaseItemAdapter<T, R>.notifyAllOnDataSetChanged() {
+fun <Model, Holder: BaseItemViewHolder<Model>> BaseItemAdapter<Model, Holder>.notifyAllOnDataSetChanged() {
     notifyDataSetChanged()
 }
 
-fun <T, R: BaseItemViewHolder<T>> RecyclerView.applyRequire(todoListAdapter: BaseItemAdapter<T, R>, manager: LinearLayoutManager){
+fun <Model, Holder: BaseItemViewHolder<Model>> RecyclerView.applyRequire(todoListAdapter: BaseItemAdapter<Model, Holder>, manager: RecyclerView.LayoutManager){
     this.apply {
         adapter = todoListAdapter
         layoutManager = manager

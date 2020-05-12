@@ -1,6 +1,5 @@
 package fr.iutbourg.sweetroutinemaker.ui.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,6 @@ import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.FirebaseDatabase
 import fr.iutbourg.sweetroutinemaker.R
-import fr.iutbourg.sweetroutinemaker.data.model.ActivityTodo
-import fr.iutbourg.sweetroutinemaker.data.model.TodoItem
 import fr.iutbourg.sweetroutinemaker.data.model.TodoList
 import fr.iutbourg.sweetroutinemaker.extension.applyRequire
 import fr.iutbourg.sweetroutinemaker.extension.initRecyclerView

@@ -2,7 +2,7 @@ package fr.iutbourg.sweetroutinemaker.extension
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import fr.iutbourg.sweetroutinemaker.data.model.TodoItem
+import fr.iutbourg.sweetroutinemaker.data.model.Options
 import fr.iutbourg.sweetroutinemaker.ui.adapter.BaseItemAdapter
 import fr.iutbourg.sweetroutinemaker.ui.adapter.viewholder.BaseItemViewHolder
 import fr.iutbourg.sweetroutinemaker.ui.viewmodel.BaseViewModel
@@ -23,13 +23,13 @@ fun <T> List<T>.removeElement(position: Int): List<T> {
     return this
 }
 
-fun List<TodoItem>.filterByName(): List<TodoItem> {
+fun List<Options>.filterByName(): List<Options> {
     return this.sortedBy {
         it.todoItemLabel
     }
 }
 
-fun List<TodoItem>.filterByNameDesc(): List<TodoItem> {
+fun List<Options>.filterByNameDesc(): List<Options> {
     return this.sortedByDescending {
         it.todoItemLabel
     }

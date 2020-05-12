@@ -4,7 +4,10 @@ import android.view.ViewGroup
 import fr.iutbourg.sweetroutinemaker.data.model.ActivityTodo
 import fr.iutbourg.sweetroutinemaker.ui.adapter.viewholder.ActivityItemViewHolder
 
-class ActivityListAdapter(override var itemList: List<ActivityTodo> = emptyList()) : BaseItemAdapter<ActivityTodo, ActivityItemViewHolder>() {
+class ActivityListAdapter :
+    BaseItemAdapter<ActivityTodo, ActivityItemViewHolder>() {
+
+    override var itemList: List<ActivityTodo> = emptyList()
 
     override fun submitList(list: List<ActivityTodo>) {
         itemList = list

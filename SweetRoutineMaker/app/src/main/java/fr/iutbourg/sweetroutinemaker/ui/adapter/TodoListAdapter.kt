@@ -3,13 +3,13 @@ package fr.iutbourg.sweetroutinemaker.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import fr.iutbourg.sweetroutinemaker.R
-import fr.iutbourg.sweetroutinemaker.data.model.TodoItem
+import fr.iutbourg.sweetroutinemaker.data.model.Options
 import fr.iutbourg.sweetroutinemaker.ui.adapter.viewholder.ItemTodoViewHolder
 import fr.iutbourg.sweetroutinemaker.ui.fragment.UserActionOnList
 
-class TodoListAdapter(private val userActionOnList: UserActionOnList) : BaseItemAdapter<TodoItem, ItemTodoViewHolder>() {
+class TodoListAdapter(private val userActionOnList: UserActionOnList) : BaseItemAdapter<Options, ItemTodoViewHolder>() {
 
-    override var itemList: List<TodoItem> = emptyList()
+    override var itemList: List<Options> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemTodoViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -25,7 +25,7 @@ class TodoListAdapter(private val userActionOnList: UserActionOnList) : BaseItem
         }
     }
 
-    override fun submitList(list: List<TodoItem>) {
+    override fun submitList(list: List<Options>) {
         TODO("Not yet implemented")
     }
 

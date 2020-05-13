@@ -15,18 +15,16 @@ import fr.iutbourg.sweetroutinemaker.data.model.ListActivityTodo
 import fr.iutbourg.sweetroutinemaker.extension.applyRequire
 import fr.iutbourg.sweetroutinemaker.extension.initRecyclerView
 import fr.iutbourg.sweetroutinemaker.ui.adapter.ActivityListAdapter
-import fr.iutbourg.sweetroutinemaker.ui.adapter.TodoListAdapter
 import fr.iutbourg.sweetroutinemaker.ui.viewmodel.ActivityListViewModel
 import fr.iutbourg.sweetroutinemaker.ui.viewmodel.TodoListViewModel
-import kotlinx.android.synthetic.main.fragment_shopping_list.*
 
 
-class ActivityListFragment(listActivity: ListActivityTodo) : Fragment() {
+class ActivityListFragment: Fragment() {
 
     private lateinit var activityListViewModel: ActivityListViewModel
     private lateinit var activityListAdapter: ActivityListAdapter
-    private var activityTodoList = listActivity.activities
-    val db = FirebaseDatabase.getInstance().reference
+//    private var activityList = listActivity.activities
+//    val db = FirebaseDatabase.getInstance().reference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,21 +38,21 @@ class ActivityListFragment(listActivity: ListActivityTodo) : Fragment() {
         activity?.run {
             activityListViewModel = ViewModelProvider(
                 this,
-                TodoListViewModel
+                ActivityListViewModel
             ).get()
         } ?: throw IllegalStateException("Invalid Activity")
-        return inflater.inflate(R.layout.fragment_shopping_list, container, false)
+            return inflater.inflate(R.layout.activity_list_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activityListAdapter = ActivityListAdapter()
-        shoppingRecyclerView.applyRequire(activityListAdapter, LinearLayoutManager(requireContext()))
-        activityTodoList!!.initRecyclerView(activityListViewModel, activityListAdapter)
-            .observe(viewLifecycleOwner, Observer {
-                if (it.isNotEmpty()) {
-                    activityListAdapter.submitList(it)
-                }
-            })
+//        activityListAdapter = ActivityListAdapter()
+//        shoppingRecyclerView.applyRequire(activityListAdapter, LinearLayoutManager(requireContext()))
+//        activityList!!.initRecyclerView(activityListViewModel, activityListAdapter)
+//            .observe(viewLifecycleOwner, Observer {
+//                if (it.isNotEmpty()) {
+//                    activityListAdapter.submitList(it)
+//                }
+//            })
     }
 }

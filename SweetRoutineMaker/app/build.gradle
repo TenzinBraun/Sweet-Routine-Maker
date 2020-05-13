@@ -4,16 +4,15 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 28
     buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "fr.iutbourg.sweetroutinemaker"
         minSdkVersion 23
-        targetSdkVersion 29
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -24,6 +23,9 @@ android {
         }
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -41,6 +43,8 @@ dependencies {
 
     // region Android - AppCompat
     implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.fragment:fragment:1.2.4"
+
     // endregion
 
     // region Android - RecyclerView

@@ -1,14 +1,13 @@
 package fr.iutbourg.sweetroutinemaker.data.model
 
 import android.util.Base64
+import java.io.Serializable
 
 data class Picture(
-    val namePicture: String,
-    val itemBase64: Base64,
-    val tags: List<String>
+    var namePicture: String,
+    var itemBase64: Base64?,
+    var tags: List<String>?
 )
-
-
 data class Options(
     val todoItemB64 : String?,
     val todoItemLabel : String,

@@ -13,7 +13,7 @@ class TodoListAdapter(private val userActionOnList: UserActionOnList) : BaseItem
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemTodoViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.todo_item_viewholder, parent, false)
+            .inflate(R.layout.option_item_viewholder, parent, false)
         return ItemTodoViewHolder(view)
     }
 

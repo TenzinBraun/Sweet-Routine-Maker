@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.FirebaseDatabase
 import fr.iutbourg.sweetroutinemaker.R
 import fr.iutbourg.sweetroutinemaker.data.model.ListActivityTodo
+import fr.iutbourg.sweetroutinemaker.data.networking.FirebaseManager
 import fr.iutbourg.sweetroutinemaker.extension.applyRequire
 import fr.iutbourg.sweetroutinemaker.extension.initRecyclerView
 import fr.iutbourg.sweetroutinemaker.ui.adapter.ActivityListAdapter

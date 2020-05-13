@@ -37,3 +37,10 @@ enum class RESTRICTIONS(restriction: Int) {
     RESTRICTED(0),
     FULL_CONTROL(1)
 }
+
+
+data class ChildProfile (
+    val key: String? = null,
+    val name: String? = null,
+    val todoList: ListActivityTodo? = null
+)

@@ -18,7 +18,6 @@ import fr.iutbourg.sweetroutinemaker.extension.notifyAllOnDataSetChanged
 import fr.iutbourg.sweetroutinemaker.extension.onValidationTodoItem
 import fr.iutbourg.sweetroutinemaker.ui.adapter.TodoListAdapter
 import fr.iutbourg.sweetroutinemaker.ui.viewmodel.TodoListViewModel
-import kotlinx.android.synthetic.main.fragment_shopping_list.*
 
 /**
  * A simple [Fragment] subclass.
@@ -29,7 +28,7 @@ class TodoListFragment(private val todoList: TodoList) : Fragment(), UserActionO
 
     private lateinit var todoListViewModel: TodoListViewModel
     private lateinit var todoListAdapter: TodoListAdapter
-    private var activityTodoList = todoList.items
+    private var itemList = todoList.items
     val db = FirebaseDatabase.getInstance().reference
 
 
@@ -43,26 +42,26 @@ class TodoListFragment(private val todoList: TodoList) : Fragment(), UserActionO
                 TodoListViewModel
             ).get()
         } ?: throw IllegalStateException("Invalid Activity")
-        return inflater.inflate(R.layout.fragment_shopping_list, container, false)
+        return inflater.inflate(R.layout.todolist_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        todoListAdapter = TodoListAdapter(this)
-        shoppingRecyclerView.applyRequire(todoListAdapter, LinearLayoutManager(requireContext()))
-        activityTodoList!!.initRecyclerView(todoListViewModel, todoListAdapter)
-            .observe(viewLifecycleOwner, Observer {
-                if(it.isNotEmpty()){
-                    todoListAdapter.submitList(it)
-                }
-            })
+//        todoListAdapter = TodoListAdapter(this)
+//        shoppingRecyclerView.applyRequire(todoListAdapter, LinearLayoutManager(requireContext()))
+//        itemList!!.initRecyclerView(todoListViewModel, todoListAdapter)
+//            .observe(viewLifecycleOwner, Observer {
+//                if(it.isNotEmpty()){
+//                    todoListAdapter.submitList(it)
+//                }
+//            })
     }
 
 
     override fun updateAllOnValidation(position: Int) {
-        shoppingRecyclerView.onValidationTodoItem(position) {
-            (adapter as TodoListAdapter).notifyAllOnDataSetChanged()
-        }
+//        shoppingRecyclerView.onValidationTodoItem(position) {
+//            (adapter as TodoListAdapter).notifyAllOnDataSetChanged()
+//        }
     }
 }
 

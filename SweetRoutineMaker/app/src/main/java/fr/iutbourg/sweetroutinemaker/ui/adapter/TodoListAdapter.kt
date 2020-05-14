@@ -9,7 +9,6 @@ import fr.iutbourg.sweetroutinemaker.ui.fragment.UserActionOnList
 
 class TodoListAdapter(private val userActionOnList: UserActionOnList) : BaseItemAdapter<Options, ItemTodoViewHolder>() {
 
-    override var itemList: List<Options> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemTodoViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -24,12 +23,6 @@ class TodoListAdapter(private val userActionOnList: UserActionOnList) : BaseItem
             userActionOnList.updateAllOnValidation(position)
         }
     }
-
-    override fun submitList(list: List<Options>) {
-        TODO("Not yet implemented")
-    }
-
-
 }
 
 

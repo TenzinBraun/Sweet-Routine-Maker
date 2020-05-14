@@ -11,7 +11,14 @@ fun RecyclerView.onValidationTodoItem(
     position: Int,
     block: RecyclerView.() -> Unit
 ) {
-    smoothScrollToPosition(position)
+    smoothScrollToPosition(position + 1)
+    return block()
+}
+
+fun RecyclerView.onValidationLastTodoItem(
+    position: Int,
+    block: RecyclerView.() -> Unit
+) {
     return block()
 }
 

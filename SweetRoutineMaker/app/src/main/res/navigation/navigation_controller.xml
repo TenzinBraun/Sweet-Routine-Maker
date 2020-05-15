@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_controller"
+    tools:ignore="UnusedNavigation"
+    app:startDestination="@id/childListFragment">
+
+    <fragment
+        android:id="@+id/childListFragment"
+        android:name="fr.iutbourg.sweetroutinemaker.ui.fragment.ChildListFragment"
+        android:label="ChildListFragment"
+        tools:layout="@layout/childlist_fragment">
+        <action
+            android:id="@+id/action_childListFragment_to_activityListFragment"
+            app:destination="@id/activityListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/activityListFragment"
+        android:name="fr.iutbourg.sweetroutinemaker.ui.fragment.ActivityListFragment"
+        android:label="ActivityListFragment"
+        tools:layout="@layout/activity_list_fragment">
+        <action
+            android:id="@+id/action_activityListFragment_to_activityTodoListFragment"
+            app:destination="@id/activityTodoListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/activityTodoListFragment"
+        android:name="fr.iutbourg.sweetroutinemaker.ui.fragment.ActivityTodoListFragment"
+        android:label="ActivityTodoListFragment"
+        tools:layout="@layout/activity_todolist_fragment"/>
+
+</navigation>

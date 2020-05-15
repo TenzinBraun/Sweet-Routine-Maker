@@ -29,8 +29,7 @@
             android:layout_height="0dp"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appToolbar"
-            app:navGraph="@navigation/app_menu" />
+            app:layout_constraintTop_toBottomOf="@id/appToolbar"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

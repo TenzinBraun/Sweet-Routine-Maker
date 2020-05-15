@@ -34,22 +34,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val dataTarget: Parcelable
             data?.let {
-                if(it.clipData !=null){
+                if (it.clipData != null) {
                     dataTarget = it.clipData as ClipData
                     for (i in 0 until dataTarget.itemCount) {
                         val uri = dataTarget.getItemAt(i).uri
-                        val inputStream = contentResolver.openInputStream(uri)
-                        val base64 = BitmapFactory.decodeStream(inputStream).toBase64()
-                        pictureImportedToBase64.add(base64)
+                        convertUriToBase64(uri, pictureImportedToBase64)
                     }
-                }else {
+                } else {
                     dataTarget = it.data as Uri
-                    val inputStream = contentResolver.openInputStream(dataTarget)
-                    val base64 = BitmapFactory.decodeStream(inputStream).toBase64()
-                    pictureImportedToBase64.add(base64)
+                    convertUriToBase64(dataTarget, pictureImportedToBase64)
                 }
             }
             pictureImportedToBase64[0].toImageView(testB64)
+        }
+    }
+
+    private fun convertUriToBase64(
+        uri: Uri?,
+        pictureImportedToBase64: MutableList<String>
+    ) {
+        uri?.let {
+            val inputStream = contentResolver.openInputStream(uri)
+            val base64 = BitmapFactory.decodeStream(inputStream).toBase64()
+            pictureImportedToBase64.add(base64)
         }
     }
 
@@ -80,12 +87,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-            if (item.itemId == R.id.importPhoto) {
-                val intent =
-                    Intent(Intent.ACTION_GET_CONTENT).putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                        .setType("image/*")
-                startActivityForResult(intent, REQUEST_CODE)
-            }
+        if (item.itemId == R.id.importPhoto) {
+            val intent =
+                Intent(Intent.ACTION_GET_CONTENT).putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                    .setType("image/*")
+            startActivityForResult(intent, REQUEST_CODE)
+        }
         return true
     }
 }

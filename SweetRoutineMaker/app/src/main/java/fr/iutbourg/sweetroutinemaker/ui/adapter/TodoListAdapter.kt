@@ -19,8 +19,9 @@ class TodoListAdapter(private val userActionOnList: UserActionOnList) : BaseItem
     override fun getItemCount(): Int = itemList.size
 
     override fun onBindViewHolder(holder: ItemTodoViewHolder, position: Int) {
-        holder.itemView.setOnClickListener {
-            userActionOnList.updateAllOnValidation(position)
+        holder.bind(itemList[position]){ option ->
+            holder.itemView.setOnClickListener {
+            }
         }
     }
 }

@@ -6,6 +6,6 @@ import fr.iutbourg.sweetroutinemaker.data.model.Options
 class ItemTodoViewHolder(itemView: View) : BaseItemViewHolder<Options>(itemView){
 
     override fun bind(element: Options, block: (Options) -> Unit) {
-        TODO("Not yet implemented")
+        return block(element)
     }
 }

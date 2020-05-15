@@ -12,9 +12,7 @@ class ActivityListAdapter :
         TODO("Not yet implemented")
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = itemList.size
 
     override fun onBindViewHolder(holder: ActivityItemViewHolder, position: Int) {
         holder.bind(itemList[position]){

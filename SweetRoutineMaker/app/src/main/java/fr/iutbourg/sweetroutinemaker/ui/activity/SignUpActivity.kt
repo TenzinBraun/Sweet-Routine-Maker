@@ -17,7 +17,7 @@ import fr.iutbourg.sweetroutinemaker.data.networking.FirebaseManager
 import fr.iutbourg.sweetroutinemaker.ui.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.sign_up_activity.*
 
-class SignUpActivity: AppCompatActivity(), FirebaseDatabaseAction<User> {
+class SignUpActivity: AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var userViewModel: UserViewModel
@@ -58,7 +58,8 @@ class SignUpActivity: AppCompatActivity(), FirebaseDatabaseAction<User> {
 
         userViewModel.createUserWithEmailPassword(sign_up_email.text.toString(), sign_up_password.text.toString()).observe(this) {
             if (it != null) {
-                add(it)
+                userViewModel.addUserInFirebase(it, db)
+                //add(it)
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             } else {
@@ -66,19 +67,6 @@ class SignUpActivity: AppCompatActivity(), FirebaseDatabaseAction<User> {
             }
         }
     }
-
-    override fun edit(position: Int, model: User) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun delete(model: User) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun add(model: User) {
-        db.push().setValue(model)
-    }
-
 
     /*
 

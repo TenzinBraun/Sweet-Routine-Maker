@@ -23,6 +23,8 @@ import fr.iutbourg.sweetroutinemaker.extension.addElement
 import fr.iutbourg.sweetroutinemaker.extension.toBase64
 import fr.iutbourg.sweetroutinemaker.ui.widget.TagAddDialog
 import kotlinx.android.synthetic.main.activity_main.*
+import fr.iutbourg.sweetroutinemaker.data.model.ChildProfile
+import fr.iutbourg.sweetroutinemaker.data.model.User
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, TagListHandler {
 

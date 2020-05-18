@@ -7,7 +7,6 @@ import fr.iutbourg.sweetroutinemaker.R
 
 class AddTagHolder(itemView: View) : BaseItemViewHolder<String>(itemView) {
 
-
     companion object Instance {
         fun create(parent: ViewGroup): AddTagHolder {
             return AddTagHolder(

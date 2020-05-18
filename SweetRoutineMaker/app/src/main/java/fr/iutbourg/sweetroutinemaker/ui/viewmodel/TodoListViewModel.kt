@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import fr.iutbourg.sweetroutinemaker.data.model.Options
 import fr.iutbourg.sweetroutinemaker.data.repository.ShoppingRepository
 
-class TodoListViewModel(shoppingRepository : ShoppingRepository) : BaseViewModel<Options>() {
+class TodoListViewModel : BaseViewModel<Options>() {
 
 
 
@@ -14,7 +14,7 @@ class TodoListViewModel(shoppingRepository : ShoppingRepository) : BaseViewModel
     companion object Factory : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return TodoListViewModel(ShoppingRepository.shoppingInstance) as T
+            return TodoListViewModel() as T
         }
     }
 

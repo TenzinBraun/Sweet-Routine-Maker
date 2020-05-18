@@ -52,7 +52,6 @@
             android:layout_below="@+id/addTagRecycler"
             android:layout_centerHorizontal="true"
             android:text="@string/validate_tag"/>
-
     </RelativeLayout>
 
 

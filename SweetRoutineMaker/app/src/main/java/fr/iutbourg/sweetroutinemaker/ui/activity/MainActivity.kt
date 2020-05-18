@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 pictures.addElement(PictureTodo(it, tagList))
             }
 //            firebaseReference.child(userKey).child("/picture").setValue(pictures)
-
         }
     }
 

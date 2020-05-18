@@ -22,6 +22,7 @@ class UserRepositoryImpl(
         viewModelScope: CoroutineScope
     ): LiveData<User?> {
         val data = MutableLiveData<User>()
+      
         viewModelScope.launch(Dispatchers.IO) {
             val dataSource = UserDataSource.instance
             data.postValue(dataSource.firebaseCreateNewUserWithEmailPassword(email, password))

@@ -2,12 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="@layout/activity_main">
-
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/activity_main_drawer_news"
-            android:title="Fil d'actualité" />
-    </group>
+    <item
+        android:id="@+id/importPhoto"
+        android:title="Importer Photo" />
 
     <item android:title="Configuration">
         <menu>

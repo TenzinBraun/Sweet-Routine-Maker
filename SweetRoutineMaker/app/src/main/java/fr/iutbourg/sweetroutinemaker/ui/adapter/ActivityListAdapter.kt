@@ -14,11 +14,6 @@ class ActivityListAdapter(
 ) :
     BaseItemAdapter<ActivityTodo, ActivityItemViewHolder>() {
 
-    override fun submitList(list: List<ActivityTodo>) {
-        itemList = list
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityItemViewHolder = ActivityItemViewHolder.create(parent)
 
     override fun getItemCount(): Int = itemList.size
@@ -37,11 +32,6 @@ class ActivityListAdapter(
                     clickListener.onActivityClick(it, activity.todoList!!)
                 }
             }
-
-
-
-
         }
     }
-
 }

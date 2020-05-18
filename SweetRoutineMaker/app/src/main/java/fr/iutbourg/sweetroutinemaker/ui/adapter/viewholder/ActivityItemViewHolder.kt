@@ -18,4 +18,5 @@ class ActivityItemViewHolder(itemView: View) : BaseItemViewHolder<ActivityTodo>(
         }
     }
 
+
 }

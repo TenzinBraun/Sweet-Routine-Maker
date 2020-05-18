@@ -4,16 +4,15 @@ import android.util.Base64
 import androidx.annotation.Keep
 import java.io.Serializable
 
-@Keep
-data class Picture(
-    var namePicture: String,
-    var itemBase64: Base64?,
-    var tags: List<String>?
-): Serializable
+
+data class PictureTodo(
+    var itemBase64: String,
+    var tags: List<String>
+)
 
 @Keep
 data class Options(
-    val todoItemB64 : String?,
+    val todoItemB64 : String,
     val todoItemLabel : String,
     val isRestricted: RESTRICTIONS = RESTRICTIONS.FULL_CONTROL
 ): Serializable
@@ -44,7 +43,6 @@ enum class RESTRICTIONS(restriction: Int): Serializable {
     RESTRICTED(0),
     FULL_CONTROL(1)
 }
-
 
 data class ChildProfile(
     val key: String? = null,

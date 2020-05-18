@@ -34,3 +34,9 @@ fun ImageView.convertToBase64ForWEBP(): String{
     bitmap.compress(Bitmap.CompressFormat.WEBP, 100, baos)
     return Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT)
 }
+
+fun Bitmap.toBase64(): String {
+    val baos = ByteArrayOutputStream()
+    this.compress(Bitmap.CompressFormat.PNG, 100, baos)
+    return Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT)
+}

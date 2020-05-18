@@ -53,6 +53,13 @@ class TodoListFragment : Fragment(), UserActionOnList {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        todoListAdapter = TodoListAdapter(this)
+        itemList!!.initRecyclerView(todoListViewModel, todoListAdapter)
+            .observe(viewLifecycleOwner, Observer {
+                if(it.isNotEmpty()){
+                    todoListAdapter.submitList(it)
+                }
+            })
         todoListAdapter = TodoListAdapter(optionList)
 
         view.recycler_view_todo_list.applyRequire(
@@ -63,9 +70,15 @@ class TodoListFragment : Fragment(), UserActionOnList {
 
 
     override fun updateAllOnValidation(position: Int) {
-//        shoppingRecyclerView.onValidationTodoItem(position) {
-//            (adapter as TodoListAdapter).notifyAllOnDataSetChanged()
-//        }
+        if((itemList?.size)!! - 1 != position) {
+//            shoppingRecyclerView.onValidationTodoItem(position) {
+                todoListAdapter.notifyAllOnDataSetChanged()
+//            }
+//        }else {
+//            shoppingRecyclerView.onValidationLastTodoItem {
+//                todoListAdapter.notifyAllOnDataSetChanged()
+//            }
+        }
     }
 }
 

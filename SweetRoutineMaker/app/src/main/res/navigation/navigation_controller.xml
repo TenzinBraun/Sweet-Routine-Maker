@@ -28,6 +28,15 @@
         android:id="@+id/activityTodoListFragment"
         android:name="fr.iutbourg.sweetroutinemaker.ui.fragment.ActivityTodoListFragment"
         android:label="ActivityTodoListFragment"
-        tools:layout="@layout/activity_todolist_fragment"/>
+        tools:layout="@layout/activity_todolist_fragment">
+        <action
+            android:id="@+id/action_activityTodoListFragment_to_todoListFragment"
+            app:destination="@id/todoListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/todoListFragment"
+        android:name="fr.iutbourg.sweetroutinemaker.ui.fragment.TodoListFragment"
+        android:label="TodoListFragment"
+        tools:layout="@layout/todolist_fragment"/>
 
 </navigation>

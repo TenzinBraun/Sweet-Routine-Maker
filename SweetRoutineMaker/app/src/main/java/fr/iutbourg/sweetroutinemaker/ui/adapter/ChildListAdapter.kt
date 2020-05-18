@@ -2,7 +2,10 @@ package fr.iutbourg.sweetroutinemaker.ui.adapter
 
 import android.content.Intent
 import android.view.ViewGroup
+import fr.iutbourg.sweetroutinemaker.data.model.ActivityTodo
 import fr.iutbourg.sweetroutinemaker.data.model.ChildProfile
+import fr.iutbourg.sweetroutinemaker.data.model.ListActivityTodo
+import fr.iutbourg.sweetroutinemaker.data.model.TodoList
 import fr.iutbourg.sweetroutinemaker.ui.adapter.viewholder.ChildItemViewHolder
 import fr.iutbourg.sweetroutinemaker.ui.fragment.ChildClickListener
 import kotlinx.android.synthetic.main.child_view_holder.view.*
@@ -31,7 +34,6 @@ class ChildListAdapter(
                 child_name_view_holder.text = childProfile.name
             }
             //endregion
-
 
 
             holder.itemView.setOnClickListener { // not sur about it, does click work on whole item ?

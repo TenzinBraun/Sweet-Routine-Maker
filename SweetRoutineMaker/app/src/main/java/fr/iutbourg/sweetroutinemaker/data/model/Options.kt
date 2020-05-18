@@ -21,7 +21,7 @@ data class Options(
 //Classe la plus haute (Homescreen)
 @Keep
 data class ListActivityTodo(
-    val activities: List<ActivityTodo>?
+    val activities: ArrayList<ActivityTodo>?
 ): Serializable
 
 //Classe lorsque l'on choisit une activité
@@ -29,7 +29,7 @@ data class ListActivityTodo(
 data class ActivityTodo(
     val activityTodoBase64: String?,
     val activityTodoLabel: String,
-    val todoList: List<TodoList>?
+    val todoList: ArrayList<TodoList>?
 ): Serializable
 
 //classe Lorsque l'on choisit une liste
@@ -49,5 +49,5 @@ enum class RESTRICTIONS(restriction: Int): Serializable {
 data class ChildProfile(
     val key: String? = null,
     val name: String? = null,
-    val todoList: ListActivityTodo? = null
+    var todoList: ListActivityTodo? = null
 ): Serializable

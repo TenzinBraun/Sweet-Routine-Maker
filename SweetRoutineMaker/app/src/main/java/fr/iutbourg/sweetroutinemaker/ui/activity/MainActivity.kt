@@ -13,13 +13,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
 import fr.iutbourg.sweetroutinemaker.R
+import fr.iutbourg.sweetroutinemaker.data.model.PictureTodo
+import fr.iutbourg.sweetroutinemaker.data.networking.FirebaseManager
+import fr.iutbourg.sweetroutinemaker.extension.addElement
 import fr.iutbourg.sweetroutinemaker.extension.toBase64
-import fr.iutbourg.sweetroutinemaker.extension.toImageView
+import fr.iutbourg.sweetroutinemaker.ui.widget.TagAddDialog
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.header_drawer.*
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, TagListHandler {
+
+    private val firebaseReference = FirebaseManager.firebaseInstance.database.reference
+    private var tagList = emptyList<String>()
+    private val pictures = mutableListOf<PictureTodo>()
+    private lateinit var userKey : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +52,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     convertUriToBase64(dataTarget, pictureImportedToBase64)
                 }
             }
-            pictureImportedToBase64[0].toImageView(testB64)
+
+            pictureImportedToBase64.forEach {
+                pictures.addElement(PictureTodo(it, tagList))
+            }
+//            firebaseReference.child(userKey).child("/picture").setValue(pictures)
+
+        }
+    }
+
+
+    private fun waitingToImplement(){
+        val pictures : () -> (Unit) = {
+            val listOfPictures = mutableListOf<PictureTodo>()
+//            pictureImportedToBase64.forEach {
+//                listOfPictures.add(PictureTodo(null, pictureImportedToBase64))
+//            }
         }
     }
 
@@ -88,11 +110,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.importPhoto) {
-            val intent =
-                Intent(Intent.ACTION_GET_CONTENT).putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                    .setType("image/*")
-            startActivityForResult(intent, REQUEST_CODE)
+
+            TagAddDialog(this).show()
+
+
+            //TODO: Show Dialog to add Tag into pictures that would be imported
+            //TODO: Then run intent to select one or multiple photos
+
         }
         return true
     }
+
+    override fun importTagList(list: List<String>) {
+        tagList = list
+        val intent =
+            Intent(Intent.ACTION_GET_CONTENT).putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                .setType("image/*")
+        startActivityForResult(intent, REQUEST_CODE)
+    }
+}
+
+
+interface TagListHandler {
+    fun importTagList(list: List<String>)
 }

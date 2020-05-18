@@ -61,7 +61,7 @@ class TodoListFragment(private val todoList: TodoList) : Fragment(), UserActionO
     override fun updateAllOnValidation(position: Int) {
         if((itemList?.size)!! - 1 != position) {
 //            shoppingRecyclerView.onValidationTodoItem(position) {
-//                todoListAdapter.notifyAllOnDataSetChanged()
+                todoListAdapter.notifyAllOnDataSetChanged()
 //            }
 //        }else {
 //            shoppingRecyclerView.onValidationLastTodoItem {

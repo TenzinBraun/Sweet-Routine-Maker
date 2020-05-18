@@ -37,6 +37,7 @@ class UserRepositoryImpl(
                                 true,
                                 isNewUser
                             ))
+
                         }
                         else {
                             data.postValue(null)

@@ -3,18 +3,16 @@ package fr.iutbourg.sweetroutinemaker.data.model
 import android.util.Base64
 import java.io.Serializable
 
-data class Picture(
-    var namePicture: String,
-    var itemBase64: Base64?,
-    var tags: List<String>?
+data class PictureTodo(
+    var itemBase64: String,
+    var tags: List<String>
 )
 data class Options(
-    val todoItemB64 : String?,
+    val todoItemB64 : String,
     val todoItemLabel : String,
     val isRestricted: RESTRICTIONS = RESTRICTIONS.FULL_CONTROL
 )
 
-//Classe la plus haute (Homescreen)
 data class ListActivityTodo(
     val activities: List<ActivityTodo>?
 )
@@ -38,7 +36,7 @@ enum class RESTRICTIONS(restriction: Int) {
     FULL_CONTROL(1)
 }
 
-
+//Classe la plus haute (Homescreen)
 data class ChildProfile (
     val key: String? = null,
     val name: String? = null,

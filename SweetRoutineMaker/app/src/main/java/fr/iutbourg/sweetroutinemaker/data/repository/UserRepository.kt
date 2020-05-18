@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserRepositoryImpl(
+    private val auth: FirebaseAuth
 ) : UserRepository {
 
     override fun firebaseCreateNewUserWithEmailPassword(
@@ -22,10 +23,25 @@ class UserRepositoryImpl(
         viewModelScope: CoroutineScope
     ): LiveData<User?> {
         val data = MutableLiveData<User>()
-      
         viewModelScope.launch(Dispatchers.IO) {
-            val dataSource = UserDataSource.instance
-            data.postValue(dataSource.firebaseCreateNewUserWithEmailPassword(email, password))
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val isNewUser: Boolean = task.getResult()?.additionalUserInfo!!.isNewUser
+                    val firebaseUser = auth.currentUser
+                    firebaseUser?.sendEmailVerification()?.addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            data.postValue(User(
+                                null,
+                                firebaseUser.uid,
+                                firebaseUser.displayName,
+                                firebaseUser.email,
+                                true,
+                                isNewUser
+                            ))
+                        }
+                    }
+                }
+            }
         }
         return data
     }
@@ -37,8 +53,24 @@ class UserRepositoryImpl(
     ): LiveData<User?> {
         val data = MutableLiveData<User?>()
         viewModelScope.launch(Dispatchers.IO) {
-            val dataSource = UserDataSource.instance
-            data.postValue(dataSource.firebaseSignInWithEmailPassword(email, password))
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val isNewUser: Boolean = task.getResult()?.additionalUserInfo!!.isNewUser
+                    val firebaseUser = auth.currentUser
+
+                    if (firebaseUser != null) {
+                        data.postValue(User(
+                            null,
+                            firebaseUser.uid,
+                            firebaseUser.displayName,
+                            firebaseUser.email,
+                            true,
+                            isNewUser
+                        ))
+                    }
+                }
+
+            }
         }
         return data
     }
@@ -94,7 +126,7 @@ interface UserRepository {
 
     companion object {
         val userContext: UserRepository by lazy {
-            UserRepositoryImpl()
+            UserRepositoryImpl(FirebaseManager.firebaseInstance.auth)
         }
     }
 }

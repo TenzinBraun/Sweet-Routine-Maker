@@ -40,7 +40,7 @@ class TodoListFragment : Fragment(), UserActionOnList {
         val args = arguments
         args?.let {
             optionList = it.getSerializable("options") as ArrayList<Options>
-            optionList.addElement(Options(null, "Test", RESTRICTIONS.FULL_CONTROL))
+            optionList.addElement(Options("", "Test", RESTRICTIONS.FULL_CONTROL))
         }
         activity?.run {
             todoListViewModel = ViewModelProvider(
@@ -53,8 +53,8 @@ class TodoListFragment : Fragment(), UserActionOnList {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        todoListAdapter = TodoListAdapter(this)
-        itemList!!.initRecyclerView(todoListViewModel, todoListAdapter)
+        todoListAdapter = TodoListAdapter(optionList)
+        optionList!!.initRecyclerView(todoListViewModel, todoListAdapter)
             .observe(viewLifecycleOwner, Observer {
                 if(it.isNotEmpty()){
                     todoListAdapter.submitList(it)
@@ -70,7 +70,7 @@ class TodoListFragment : Fragment(), UserActionOnList {
 
 
     override fun updateAllOnValidation(position: Int) {
-        if((itemList?.size)!! - 1 != position) {
+        if((optionList?.size)!! - 1 != position) {
 //            shoppingRecyclerView.onValidationTodoItem(position) {
                 todoListAdapter.notifyAllOnDataSetChanged()
 //            }

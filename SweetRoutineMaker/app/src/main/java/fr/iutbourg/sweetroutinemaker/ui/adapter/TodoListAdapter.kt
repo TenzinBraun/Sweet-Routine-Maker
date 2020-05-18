@@ -11,12 +11,6 @@ class TodoListAdapter(
     override var itemList: List<Options>
 ) : BaseItemAdapter<Options, ItemTodoViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemTodoViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.option_item_viewholder, parent, false)
-        return ItemTodoViewHolder(view)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemTodoViewHolder = ItemTodoViewHolder.create(parent)
 
     override fun getItemCount(): Int = itemList.size

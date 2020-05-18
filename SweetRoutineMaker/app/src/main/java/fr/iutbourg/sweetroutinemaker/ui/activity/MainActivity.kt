@@ -19,9 +19,6 @@ import fr.iutbourg.sweetroutinemaker.extension.addElement
 import fr.iutbourg.sweetroutinemaker.extension.toBase64
 import fr.iutbourg.sweetroutinemaker.ui.widget.TagAddDialog
 import kotlinx.android.synthetic.main.activity_main.*
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.navigation.NavArgument
-import androidx.navigation.fragment.NavHostFragment
 import fr.iutbourg.sweetroutinemaker.data.model.ChildProfile
 import fr.iutbourg.sweetroutinemaker.data.model.User
 

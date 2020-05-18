@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.sign_up_activity.*
 
 const val REQUEST_CODE = 4500
 
-class LoginActivity: AppCompatActivity(), FirebaseDatabaseAction<User> {
+class LoginActivity: AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private val db = FirebaseManager.firebaseInstance.database.reference
     private lateinit var userViewModel: UserViewModel
@@ -62,7 +62,6 @@ class LoginActivity: AppCompatActivity(), FirebaseDatabaseAction<User> {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("user", it) // or send childrenList instead
                     startActivity(intent)
-
                 }
             } else {
                 Toast.makeText(baseContext, "Please verify your email", Toast.LENGTH_SHORT).show()
@@ -100,18 +99,6 @@ class LoginActivity: AppCompatActivity(), FirebaseDatabaseAction<User> {
                 updateUI(null)
             }
         }
-    }
-
-    override fun edit(position: Int, model: User) {
-
-    }
-
-    override fun delete(model: User) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun add(model: User) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 /*
     private fun login() {

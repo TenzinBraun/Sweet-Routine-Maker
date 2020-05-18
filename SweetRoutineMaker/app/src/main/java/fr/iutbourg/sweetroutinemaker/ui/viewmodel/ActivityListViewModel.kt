@@ -17,7 +17,6 @@ class ActivityListViewModel : BaseViewModel<ActivityTodo>() {
         }
     }
 
-
     override fun getItemList(): LiveData<List<ActivityTodo>> {
         TODO("Not yet implemented")
     }

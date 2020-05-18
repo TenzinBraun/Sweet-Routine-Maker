@@ -12,7 +12,7 @@ data class PictureTodo(
 
 @Keep
 data class Options(
-    val todoItemB64 : String,
+    val todoItemB64 : String?,
     val todoItemLabel : String,
     val isRestricted: RESTRICTIONS = RESTRICTIONS.FULL_CONTROL
 ): Serializable

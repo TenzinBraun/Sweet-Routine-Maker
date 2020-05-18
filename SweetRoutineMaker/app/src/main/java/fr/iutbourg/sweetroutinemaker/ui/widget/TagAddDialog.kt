@@ -11,9 +11,10 @@ import fr.iutbourg.sweetroutinemaker.ui.activity.MainActivity
 import fr.iutbourg.sweetroutinemaker.ui.activity.TagListHandler
 import fr.iutbourg.sweetroutinemaker.ui.adapter.AddTagAdapter
 import kotlinx.android.synthetic.main.dialog_add_tag.*
+import java.util.*
 
 
-class TagAddDialog(private val activity: MainActivity) : BaseDialog(activity){
+class TagAddDialog(private val activity: MainActivity) : BaseDialog(activity) {
 
     private lateinit var addTagAdapter: AddTagAdapter
     private var list = mutableListOf<String>()
@@ -28,7 +29,13 @@ class TagAddDialog(private val activity: MainActivity) : BaseDialog(activity){
         addTagToList.setOnClickListener {
             addtTagEditText.text.apply {
                 trim()
-                list.addElement(this.toString())
+
+                val tagEdited = toString()
+
+                tagEdited.toLowerCase(Locale.ROOT)
+                if (list.contains(tagEdited))
+                    list.addElement(tagEdited)
+
                 addTagAdapter.submitList(list = list)
                 addTagValidate.show()
             }
@@ -39,7 +46,7 @@ class TagAddDialog(private val activity: MainActivity) : BaseDialog(activity){
             this.dismiss()
         }
 
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             addTagValidate.hide()
         }
 

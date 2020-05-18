@@ -10,16 +10,6 @@ import kotlinx.android.synthetic.main.child_view_holder.view.*
 
 class ChildItemViewHolder(itemView: View): BaseItemViewHolder<ChildProfile>(itemView) {
 
-    /*
-    override fun bind(element: ChildProfile, block: (Options) -> Unit) {
-        itemView.apply {
-            this.child_name_view_holder.text = element.name
-        }
-    }
-
-     */
-
-
     companion object {
         fun create(parent: ViewGroup): ChildItemViewHolder {
             val view = LayoutInflater.from(

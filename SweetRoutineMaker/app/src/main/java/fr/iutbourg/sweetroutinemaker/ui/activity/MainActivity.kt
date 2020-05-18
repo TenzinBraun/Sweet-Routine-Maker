@@ -7,30 +7,28 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
 import fr.iutbourg.sweetroutinemaker.R
+import fr.iutbourg.sweetroutinemaker.data.model.ChildProfile
 import fr.iutbourg.sweetroutinemaker.data.model.PictureTodo
+import fr.iutbourg.sweetroutinemaker.data.model.User
 import fr.iutbourg.sweetroutinemaker.data.networking.FirebaseManager
 import fr.iutbourg.sweetroutinemaker.extension.addElement
 import fr.iutbourg.sweetroutinemaker.extension.toBase64
 import fr.iutbourg.sweetroutinemaker.ui.widget.TagAddDialog
 import kotlinx.android.synthetic.main.activity_main.*
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.navigation.NavArgument
-import androidx.navigation.fragment.NavHostFragment
-import fr.iutbourg.sweetroutinemaker.data.model.ChildProfile
-import fr.iutbourg.sweetroutinemaker.data.model.User
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, TagListHandler {
 
     private val firebaseReference = FirebaseManager.firebaseInstance.database.reference
-    private var tagList = emptyList<String>()
+    private var tags = emptyList<String>()
     private val pictures = mutableListOf<PictureTodo>()
-    private lateinit var userKey : String
     private var currentUser: User = User()
 
     override fun onStart() {
@@ -70,8 +68,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onActivityResult(requestCode, resultCode, data)
         val pictureImportedToBase64 = mutableListOf<String>()
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val dataTarget: Parcelable
             data?.let {
+                val dataTarget: Parcelable
+
                 if (it.clipData != null) {
                     dataTarget = it.clipData as ClipData
                     for (i in 0 until dataTarget.itemCount) {
@@ -85,19 +84,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             pictureImportedToBase64.forEach {
-                pictures.addElement(PictureTodo(it, tagList))
+                pictures.addElement(PictureTodo(it, tags))
             }
-//            firebaseReference.child(userKey).child("/picture").setValue(pictures)
-        }
-    }
 
-
-    private fun waitingToImplement(){
-        val pictures : () -> (Unit) = {
-            val listOfPictures = mutableListOf<PictureTodo>()
-//            pictureImportedToBase64.forEach {
-//                listOfPictures.add(PictureTodo(null, pictureImportedToBase64))
-//            }
+            currentUser.key?.let {
+                firebaseReference.child("/$it").child("/pictures").setValue(pictures)
+                firebaseReference.child("/$it").child("/tags").setValue(tags)
+            }
         }
     }
 
@@ -146,15 +139,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun importTagList(list: List<String>) {
-        tagList = list
+        tags = list
         val intent =
             Intent(Intent.ACTION_GET_CONTENT).putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
                 .setType("image/*")
         startActivityForResult(intent, REQUEST_CODE)
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
-
 
 interface TagListHandler {
     fun importTagList(list: List<String>)

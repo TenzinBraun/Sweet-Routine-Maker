@@ -12,5 +12,5 @@ abstract class BaseItemAdapter<Model, Holder: BaseItemViewHolder<Model>> : Recyc
         itemList = list
         notifyDataSetChanged()
     }
-    protected open var itemList: List<Model> = emptyList()
+    open var itemList: List<Model> = emptyList()
 }

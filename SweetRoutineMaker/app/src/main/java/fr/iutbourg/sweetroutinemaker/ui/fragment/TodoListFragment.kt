@@ -1,24 +1,21 @@
 package fr.iutbourg.sweetroutinemaker.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.database.FirebaseDatabase
 import fr.iutbourg.sweetroutinemaker.R
 import fr.iutbourg.sweetroutinemaker.data.model.Options
 import fr.iutbourg.sweetroutinemaker.data.model.RESTRICTIONS
-import fr.iutbourg.sweetroutinemaker.data.model.TodoList
-import fr.iutbourg.sweetroutinemaker.extension.*
+import fr.iutbourg.sweetroutinemaker.extension.addElement
+import fr.iutbourg.sweetroutinemaker.extension.applyRequire
+import fr.iutbourg.sweetroutinemaker.extension.initRecyclerView
+import fr.iutbourg.sweetroutinemaker.extension.notifyAllOnDataSetChanged
 import fr.iutbourg.sweetroutinemaker.ui.adapter.TodoListAdapter
 import fr.iutbourg.sweetroutinemaker.ui.viewmodel.TodoListViewModel
-import kotlinx.android.synthetic.main.todolist_fragment.*
 import kotlinx.android.synthetic.main.todolist_fragment.view.*
 
 /**
@@ -53,26 +50,32 @@ class TodoListFragment : Fragment(), UserActionOnList {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        todoListAdapter = TodoListAdapter(this)
-        itemList!!.initRecyclerView(todoListViewModel, todoListAdapter)
+        todoListAdapter = TodoListAdapter()
+        optionList.initRecyclerView(todoListViewModel, todoListAdapter)
             .observe(viewLifecycleOwner, Observer {
-                if(it.isNotEmpty()){
+                if (it.isNotEmpty()) {
                     todoListAdapter.submitList(it)
                 }
             })
-        todoListAdapter = TodoListAdapter(optionList)
-
         view.recycler_view_todo_list.applyRequire(
             todoListAdapter,
             GridLayoutManager(requireContext(), 2)
         )
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.option_menu, menu)
+        val searchMenuItem = menu.findItem(R.id.showOptions)
+        searchMenuItem.setOnMenuItemClickListener{
+            true
+        }
+    }
+
 
     override fun updateAllOnValidation(position: Int) {
-        if((itemList?.size)!! - 1 != position) {
+        if ((optionList.size) - 1 != position) {
 //            shoppingRecyclerView.onValidationTodoItem(position) {
-                todoListAdapter.notifyAllOnDataSetChanged()
+            todoListAdapter.notifyAllOnDataSetChanged()
 //            }
 //        }else {
 //            shoppingRecyclerView.onValidationLastTodoItem {

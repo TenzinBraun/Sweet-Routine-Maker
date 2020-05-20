@@ -50,6 +50,8 @@ class TodoListFragment : Fragment(), UserActionOnList {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+
         todoListAdapter = TodoListAdapter()
         optionList.initRecyclerView(todoListViewModel, todoListAdapter)
             .observe(viewLifecycleOwner, Observer {

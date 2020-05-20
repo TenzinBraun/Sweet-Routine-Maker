@@ -21,7 +21,16 @@ data class Options(
 @Keep
 data class ListActivityTodo(
     val activities: ArrayList<ActivityTodo>?
-): Serializable
+): Serializable {
+    constructor(key: String, hashMap: HashMap<String, Any>): this(null) {
+
+        val test = (hashMap["activities"]  as ArrayList<HashMap<String, String>>)
+
+        test.forEach {
+            activities!!.add(ActivityTodo(null, it["name"]!!, null))
+        }
+    }
+}
 
 //Classe lorsque l'on choisit une activité
 @Keep
@@ -45,7 +54,7 @@ enum class RESTRICTIONS(restriction: Int): Serializable {
 }
 
 data class ChildProfile(
-    val key: String? = null,
-    val name: String? = null,
+    var key: String? = null,
+    var name: String? = null,
     var todoList: ListActivityTodo? = null
 ): Serializable

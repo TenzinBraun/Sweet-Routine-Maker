@@ -3,16 +3,16 @@ package fr.iutbourg.sweetroutinemaker.ui.adapter
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import fr.iutbourg.sweetroutinemaker.data.model.ActivityTodo
-import fr.iutbourg.sweetroutinemaker.data.model.TodoList
 import fr.iutbourg.sweetroutinemaker.ui.adapter.viewholder.ActivityItemViewHolder
 import fr.iutbourg.sweetroutinemaker.ui.fragment.ActivityClickListener
+import fr.iutbourg.sweetroutinemaker.ui.fragment.ActivityListFragment
 import kotlinx.android.synthetic.main.activity_view_holder.view.*
 
 class ActivityListAdapter(
     override var itemList: List<ActivityTodo>,
     private var clickListener: ActivityClickListener
-) :
-    BaseItemAdapter<ActivityTodo, ActivityItemViewHolder>() {
+) : BaseItemAdapter<ActivityTodo, ActivityItemViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityItemViewHolder = ActivityItemViewHolder.create(parent)
 

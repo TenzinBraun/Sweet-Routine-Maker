@@ -21,6 +21,8 @@ class UserViewModel(
 
     fun addUserInFirebase(user: User, nodes: DatabaseReference) = firebaseRepository.add(user, nodes)
 
+    fun removeEventListener() = userRepository.stopListeningDataChanges(viewModelScope)
+
     companion object Factory : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

@@ -1,9 +1,7 @@
 package fr.iutbourg.sweetroutinemaker.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -47,13 +45,17 @@ class ActivityTodoListFragment : Fragment(), ActivityTodoClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         activityTodoListAdapter =  ActivityTodoListAdapter(todoList, this)
 
         view.recycler_view_activity_todo.apply {
             adapter = activityTodoListAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.child_menu, menu)
     }
 
     override fun onActivityTodoClickListener(items: List<Options>) {

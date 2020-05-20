@@ -8,7 +8,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import fr.iutbourg.sweetroutinemaker.data.model.User
 import fr.iutbourg.sweetroutinemaker.data.networking.FirebaseManager
-import fr.iutbourg.sweetroutinemaker.data.networking.datasource.UserDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,6 +15,8 @@ import kotlinx.coroutines.launch
 class UserRepositoryImpl(
     private val auth: FirebaseAuth
 ) : UserRepository {
+
+    private lateinit var eventListener: ValueEventListener
 
     override fun firebaseCreateNewUserWithEmailPassword(
         email: String,
@@ -82,29 +83,39 @@ class UserRepositoryImpl(
         val ref = FirebaseManager.firebaseInstance.database.reference
         val data = MutableLiveData<User?>()
         viewModelScope.launch(Dispatchers.IO) {
-            ref.addValueEventListener(object: ValueEventListener {
+            //eventListener = ref.addValueEventListener(object: ValueEventListener {
+            ref.addListenerForSingleValueEvent(object: ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     data.postValue(getUserFirebase(snapshot.value as Map<String, HashMap<String, Any>>, user))
                 }
+
             })
         }
+
         return data
     }
+
+    //TODO remove if finally not use
+    override fun stopListeningDataChanges(viewModelScope: CoroutineScope) {
+        val ref = FirebaseManager.firebaseInstance.database.reference
+        ref.removeEventListener(eventListener)
+    }
+
 
     private fun getUserFirebase(map: Map<String, HashMap<String, Any>>?, user: User?): User {
         var currentUser = User()
         map?.let {
             for((key, value) in it.entries) {
                 val tempUser = User(key, value)
-                if (tempUser.uid == user?.uid)
+                if (tempUser.uid == user?.uid) {
                     currentUser = tempUser
+                }
             }
         }
         return currentUser
     }
-
 
 }
 
@@ -123,6 +134,8 @@ interface UserRepository {
     ): LiveData<User?>
 
     fun startListeningDataChanges(viewModelScope: CoroutineScope, user: User): LiveData<User?>
+
+    fun stopListeningDataChanges(viewModelScope: CoroutineScope)
 
     companion object {
         val userContext: UserRepository by lazy {

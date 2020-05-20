@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import fr.iutbourg.sweetroutinemaker.data.model.Options
-import fr.iutbourg.sweetroutinemaker.data.repository.ShoppingRepository
 
 class TodoListViewModel : BaseViewModel<Options>() {
 

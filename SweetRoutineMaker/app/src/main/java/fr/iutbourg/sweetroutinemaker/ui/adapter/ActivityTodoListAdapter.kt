@@ -36,7 +36,7 @@ class ActivityTodoListAdapter(
                     .into(activity_todo_image_view)
 
                 setOnClickListener {
-                    clickListener.onActivityTodoClickListener(todo.items!!)
+                    clickListener.onActivityTodoClickListener(todo.items!!, position)
                 }
             }
         }

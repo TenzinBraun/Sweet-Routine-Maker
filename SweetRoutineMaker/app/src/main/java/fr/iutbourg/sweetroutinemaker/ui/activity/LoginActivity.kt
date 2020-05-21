@@ -20,7 +20,6 @@ const val REQUEST_CODE = 4500
 
 class LoginActivity: AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
-    private val db = FirebaseManager.firebaseInstance.database.reference
     private lateinit var userViewModel: UserViewModel
 
 
@@ -56,7 +55,6 @@ class LoginActivity: AppCompatActivity() {
         if (currentUser != null) {
             if (currentUser.isEmailVerified) {
                 userViewModel.getDataOfUser(User(uid = currentUser.uid)).observe(this) {
-                    // TODO get user and send to next activity
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("user", it) // or send childrenList instead
                     startActivity(intent)
@@ -98,36 +96,5 @@ class LoginActivity: AppCompatActivity() {
             }
         }
     }
-/*
-    private fun login() {
-        if (edit_text_email.text.toString().isEmpty()) {
-            sign_up_email.error = "Please enter email"
-            sign_up_email.requestFocus()
-            return
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(edit_text_email.text.toString()).matches()) {
-            sign_up_email.error = "Please enter valid email"
-            sign_up_email.requestFocus()
-            return
-        }
 
-        if (edit_text_password.text.toString().isEmpty()) {
-            sign_up_password.error = "Please enter password"
-            sign_up_password.requestFocus()
-            return
-        }
-
-        auth.signInWithEmailAndPassword(edit_text_email.text.toString(), edit_text_password.text.toString()).addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                val user = auth.currentUser
-                updateUI(user)
-            } else {
-                Toast.makeText(baseContext, "Login failed", Toast.LENGTH_SHORT).show()
-                updateUI(null)
-            }
-        }
-
-    }
-
- */
 }

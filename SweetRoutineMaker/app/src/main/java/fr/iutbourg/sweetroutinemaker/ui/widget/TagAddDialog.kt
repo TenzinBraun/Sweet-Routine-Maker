@@ -20,7 +20,6 @@ class TagAddDialog(activity: MainActivity) : BaseDialog(activity) {
     private var list = mutableListOf<String>()
     private val callback = activity as TagListHandler
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         this.window?.setBackgroundDrawableResource(android.R.color.transparent)
         addTagAdapter = AddTagAdapter()

@@ -13,10 +13,18 @@ data class User (
     @SerializedName("isAuthenticated") var isAuthenticated: Boolean? = null,
     @SerializedName("isNew") var isNew: Boolean? = null,
     @SerializedName("isCreated") var isCreated: Boolean? = null,
-    @SerializedName("childProfile") var childProfile: ArrayList<ChildProfile>? = null
+    @SerializedName("children") var children: ArrayList<ChildProfile>? = null
 )  : Serializable {
     constructor(key: String, hashMap: HashMap<String, Any>): this(key, null, null, null, null, null, null, null) {
         uid = hashMap["uid"] as String
+
+        val test = (hashMap["children"] as ArrayList<HashMap<String, String>>)
+        test.let {
+            children = ArrayList()
+        }
+        test.forEach {
+            children?.add(ChildProfile(null,it["name"], null))
+        }
     }
 }
 

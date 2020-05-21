@@ -17,6 +17,7 @@ import fr.iutbourg.sweetroutinemaker.data.model.ChildProfile
 import fr.iutbourg.sweetroutinemaker.data.model.PictureTodo
 import fr.iutbourg.sweetroutinemaker.data.model.User
 import fr.iutbourg.sweetroutinemaker.data.networking.FirebaseManager
+import fr.iutbourg.sweetroutinemaker.data.utils.PreferencesUtils
 import fr.iutbourg.sweetroutinemaker.extension.addElement
 import fr.iutbourg.sweetroutinemaker.extension.toBase64
 import fr.iutbourg.sweetroutinemaker.ui.widget.TagAddDialog
@@ -34,27 +35,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         currentUser = intent.getSerializableExtra("user") as User
         val navController = findNavController(R.id.appFragmentContainer)
         val bundle = Bundle()
-        if (currentUser.childProfile == null) {
-            currentUser.childProfile = ArrayList()
-            currentUser.childProfile?.add(ChildProfile(null, "Louis", null))
-            currentUser.childProfile?.add(ChildProfile(null, "Hugo", null))
+        if (currentUser.children == null) {
+            currentUser.children = ArrayList()
+            /*currentUser.childProfile?.add(ChildProfile(null, "Louis", null))
+            currentUser.childProfile?.add(ChildProfile(null, "Hugo", null))*/
         }
-        bundle.putSerializable("childrenList", currentUser.childProfile)
+
+        PreferencesUtils.saveString("userKey", currentUser.key!!, this)
+        bundle.putSerializable("childrenList", currentUser.children)
         navController.setGraph(R.navigation.navigation_controller, bundle)
     }
 
-    /*fun testFragment(){
-        val bundle = Bundle()
-        val navHostFragment = appFragmentContainer as NavHostFragment
-        val inflater = navHostFragment.navController.navInflater
-        val graph = inflater.inflate(R.navigation.navigation_controller)
-        val testMano = currentUser.childProfile as MutableList<ChildProfile>
-        testMano.add(ChildProfile(null, "Arthurito", null))
-        bundle.putSerializable("childrenList", arrayOf(testMano))
-        val navArgument = NavArgument.Builder().setDefaultValue()
-        graph.add
 
-    }*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

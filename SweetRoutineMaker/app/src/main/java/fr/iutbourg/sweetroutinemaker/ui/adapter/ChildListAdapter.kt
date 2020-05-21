@@ -37,7 +37,7 @@ class ChildListAdapter(
 
 
             holder.itemView.setOnClickListener { // not sur about it, does click work on whole item ?
-                clickListener.onChildClickListener(holder.itemView, childProfile.todoList!!)
+                clickListener.onChildClickListener(childProfile.todoList!!, position)
             }
         }
 

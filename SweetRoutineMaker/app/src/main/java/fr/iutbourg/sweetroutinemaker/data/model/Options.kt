@@ -19,24 +19,55 @@ data class Options(
 //Classe la plus haute (Homescreen)
 @Keep
 data class ListActivityTodo(
-    val activities: ArrayList<ActivityTodo>?
-): Serializable
+    var activities: ArrayList<ActivityTodo>?
+): Serializable {
+    constructor(key: String, hashMap: HashMap<String, Any>): this(null) {
+
+        val test = (hashMap["activities"]  as ArrayList<HashMap<String, String>>)
+
+        test.forEach {
+            activities!!.add(ActivityTodo(null, it["name"]!!, null))
+        }
+    }
+}
 
 //Classe lorsque l'on choisit une activité
 @Keep
 data class ActivityTodo(
-    val activityTodoBase64: String?,
-    val activityTodoLabel: String,
-    val todoList: ArrayList<TodoList>?
-): Serializable
+    var activityTodoBase64: String?,
+    var activityTodoLabel: String?,
+    var todoList: ArrayList<TodoList>?
+): Serializable {
+    constructor(key: String, hashMap: HashMap<String, Any>): this(null, null, null) {
+        activityTodoBase64 = hashMap["activityTodoBase64"] as String?
+        activityTodoLabel = hashMap["activityTodoLabel"] as String?
+
+        val test = (hashMap["todoList"] as ArrayList<HashMap<String, String>>?)
+
+        test.let{
+            todoList = ArrayList()
+        }
+    }
+}
 
 //classe Lorsque l'on choisit une liste
 @Keep
 data class TodoList(
-    val listLabel: String,
-    val listBase64: String?,
-    val items: List<Options>?
-): Serializable
+    var listLabel: String?,
+    var listBase64: String?,
+    var items: List<Options>?
+): Serializable {
+    constructor(key: String, hashMap: HashMap<String, Any>): this(null, null, null) {
+        listLabel = hashMap["listLabel"] as String?
+        listBase64 = hashMap["listBase64"] as String?
+
+        val test = (hashMap["items"] as ArrayList<HashMap<String, String>>?)
+
+        test.let {
+            items = ArrayList()
+        }
+    }
+}
 
 enum class RESTRICTIONS(restriction: Int): Serializable {
     RESTRICTED(0),
@@ -44,7 +75,7 @@ enum class RESTRICTIONS(restriction: Int): Serializable {
 }
 
 data class ChildProfile(
-    val key: String? = null,
-    val name: String? = null,
+    var key: String? = null,
+    var name: String? = null,
     var todoList: ListActivityTodo? = null
 ): Serializable

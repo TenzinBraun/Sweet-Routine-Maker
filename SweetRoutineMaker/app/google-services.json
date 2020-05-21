@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "582445498678",
+    "firebase_url": "https://sweetroutinemaker.firebaseio.com",
+    "project_id": "sweetroutinemaker",
+    "storage_bucket": "sweetroutinemaker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582445498678:android:2cc0aa796b6efd392cb397",
+        "android_client_info": {
+          "package_name": "fr.iutbourg.sweetroutinemaker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582445498678-2s7abt83g26gk2bqpgp8tq2ihs11ie0h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.iutbourg.sweetroutinemaker",
+            "certificate_hash": "fce7bd6528b517a12ded9f38446c72c5afd0e4fa"
+          }
+        },
+        {
+          "client_id": "582445498678-n9pu6j06avdvnfjc1qpoatnce37mbjjn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4T_55XDKiI-Ge4WslE3_rYzEBuwaU2eI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582445498678-n9pu6j06avdvnfjc1qpoatnce37mbjjn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

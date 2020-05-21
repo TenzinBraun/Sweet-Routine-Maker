@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Sweet Routine Maker</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_tag">Entrez un Tag pour vos photos</string>
+    <string name="validate_tag">Valider</string>
 </resources>

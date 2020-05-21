@@ -11,28 +11,47 @@
 
         <EditText
             android:id="@+id/sign_up_email"
-            android:layout_width="wrap_content"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
             android:layout_centerHorizontal="true"
             android:hint="Entrez une adresse Email"
-            android:layout_marginBottom="8dp"/>
+            android:imeActionId="6"
+            android:imeActionLabel="Email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
+
 
         <EditText
             android:id="@+id/sign_up_password"
-            android:layout_width="wrap_content"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:hint="Entrez un mot de passe"
             android:layout_below="@id/sign_up_email"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="24dp"/>
+            android:imeActionId="6"
+            android:imeActionLabel="Password"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true" />
+
 
         <Button
             android:id="@+id/validate_sign_up_button"
-            android:layout_width="wrap_content"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/sign_up_password"
             android:layout_centerHorizontal="true"
-            android:text="Sign Up"/>
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"
+            android:layout_marginBottom="16dp"
+            android:layout_below="@+id/sign_up_password"
+            android:background="@drawable/border_login_button"
+            android:elevation="4dp"
+            android:text="Sign Up"
+            android:textColor="@color/colorAccent" />
 
     </RelativeLayout>
 

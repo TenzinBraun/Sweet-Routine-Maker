@@ -1,6 +1,5 @@
 package fr.iutbourg.sweetroutinemaker.data.model
 
-import android.util.Base64
 import androidx.annotation.Keep
 import java.io.Serializable
 

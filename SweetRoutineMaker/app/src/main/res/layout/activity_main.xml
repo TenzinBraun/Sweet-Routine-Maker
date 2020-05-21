@@ -17,7 +17,8 @@
             android:id="@+id/appToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="SweetBar"
             app:titleTextColor="@android:color/black" />
@@ -29,7 +30,7 @@
             android:layout_height="0dp"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appToolbar"/>
+            app:layout_constraintTop_toBottomOf="@id/appToolbar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -38,8 +39,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/colorAccent"
+        android:background="@drawable/background_body_drawer"
         app:headerLayout="@layout/header_drawer"
+        app:itemTextColor="@color/white_color"
+        app:itemIconTint="@color/colorAccent"
+        app:itemTextAppearance="@style/DrawerTextAppearence"
         app:menu="@menu/body_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

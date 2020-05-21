@@ -1,15 +1,14 @@
-package fr.iutbourg.testcustomrecyclerview
+package fr.iutbourg.sweetroutinemaker.ui.widget
 
-import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import androidx.fragment.app.FragmentActivity
 import fr.iutbourg.sweetroutinemaker.R
 import fr.iutbourg.sweetroutinemaker.callback.SectionHandler
 import kotlinx.android.synthetic.main.dialog_add_section.*
 
 
-class AddSectionDialog(context: Context, private val callback: SectionHandler) : Dialog(context){
+class AddSectionDialog(context: FragmentActivity, private val callback: SectionHandler) : BaseDialog(context){
 
 
     private var tags = mutableListOf<String>()

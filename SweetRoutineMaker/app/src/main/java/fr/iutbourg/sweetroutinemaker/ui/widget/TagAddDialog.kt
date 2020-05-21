@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.dialog_add_tag.*
 import java.util.*
 
 
-class TagAddDialog(private val activity: MainActivity) : BaseDialog(activity) {
+class TagAddDialog(activity: MainActivity) : BaseDialog(activity) {
 
     private lateinit var addTagAdapter: AddTagAdapter
     private var list = mutableListOf<String>()

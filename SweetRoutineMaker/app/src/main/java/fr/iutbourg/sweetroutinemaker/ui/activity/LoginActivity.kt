@@ -11,12 +11,10 @@ import androidx.lifecycle.observe
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import fr.iutbourg.sweetroutinemaker.R
-import fr.iutbourg.sweetroutinemaker.callback.FirebaseDatabaseAction
 import fr.iutbourg.sweetroutinemaker.data.model.User
 import fr.iutbourg.sweetroutinemaker.data.networking.FirebaseManager
 import fr.iutbourg.sweetroutinemaker.ui.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.login_activity.*
-import kotlinx.android.synthetic.main.sign_up_activity.*
 
 const val REQUEST_CODE = 4500
 
@@ -73,19 +71,19 @@ class LoginActivity: AppCompatActivity() {
 
     private fun login() {
         if (edit_text_email.text.toString().isEmpty()) {
-            sign_up_email.error = "Please enter email"
-            sign_up_email.requestFocus()
+            edit_text_email.error = "Please enter email"
+            edit_text_email.requestFocus()
             return
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(edit_text_email.text.toString()).matches()) {
-            sign_up_email.error = "Please enter valid email"
-            sign_up_email.requestFocus()
+            edit_text_email.error = "Please enter valid email"
+            edit_text_email.requestFocus()
             return
         }
 
         if (edit_text_password.text.toString().isEmpty()) {
-            sign_up_password.error = "Please enter password"
-            sign_up_password.requestFocus()
+            edit_text_password.error = "Please enter password"
+            edit_text_password.requestFocus()
             return
         }
 

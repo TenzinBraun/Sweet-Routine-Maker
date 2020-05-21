@@ -9,7 +9,6 @@ import fr.iutbourg.sweetroutinemaker.data.repository.ShoppingRepository
 
 class ActivityListViewModel : BaseViewModel<ActivityTodo>() {
 
-
     companion object Factory : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

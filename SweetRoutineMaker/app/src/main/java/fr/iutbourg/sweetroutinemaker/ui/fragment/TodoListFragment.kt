@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import fr.iutbourg.sweetroutinemaker.R
 import fr.iutbourg.sweetroutinemaker.data.model.Options
 import fr.iutbourg.sweetroutinemaker.data.model.RESTRICTIONS
+import fr.iutbourg.sweetroutinemaker.data.networking.FirebaseManager
+import fr.iutbourg.sweetroutinemaker.data.utils.PreferencesUtils
 import fr.iutbourg.sweetroutinemaker.extension.addElement
 import fr.iutbourg.sweetroutinemaker.extension.applyRequire
 import fr.iutbourg.sweetroutinemaker.extension.initRecyclerView
@@ -23,11 +25,14 @@ import kotlinx.android.synthetic.main.todolist_fragment.view.*
  * Use the [TodoListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TodoListFragment : Fragment(), UserActionOnList {
+class TodoListFragment : Fragment() {
 
     private lateinit var todoListViewModel: TodoListViewModel
     private lateinit var todoListAdapter: TodoListAdapter
     private lateinit var optionList: List<Options>
+    private var childSelectedIndex: Int = 0
+    private var activityIndex: Int = 0
+    private var activityTodoSelectedIndex: Int = 0
 
 
     override fun onCreateView(
@@ -37,6 +42,9 @@ class TodoListFragment : Fragment(), UserActionOnList {
         val args = arguments
         args?.let {
             optionList = it.getSerializable("options") as ArrayList<Options>
+            childSelectedIndex = it.getSerializable("childSelectedIndex") as Int
+            activityIndex = it.getSerializable("activityIndex") as Int
+            activityTodoSelectedIndex = it.getSerializable("activityTodoSelectedIndex") as Int
             optionList.addElement(Options("", "Test", RESTRICTIONS.FULL_CONTROL))
         }
         activity?.run {
@@ -63,6 +71,19 @@ class TodoListFragment : Fragment(), UserActionOnList {
             todoListAdapter,
             GridLayoutManager(requireContext(), 2)
         )
+
+        todoListViewModel.getTodos(
+            FirebaseManager.firebaseInstance.database.reference
+                .child(PreferencesUtils.getString("userKey", "", requireContext())!!)
+                .child("children")
+                .child(childSelectedIndex.toString())
+                .child("activities")
+                .child(activityIndex.toString())
+                .child("activityTodoList")
+                .child(activityTodoSelectedIndex.toString())
+        ).observe(viewLifecycleOwner, Observer {
+            todoListAdapter.submitList(it)
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -73,21 +94,5 @@ class TodoListFragment : Fragment(), UserActionOnList {
         }
     }
 
-
-    override fun updateAllOnValidation(position: Int) {
-      if ((optionList.size) - 1 != position) {
-//            shoppingRecyclerView.onValidationTodoItem(position) {
-            todoListAdapter.notifyAllOnDataSetChanged()
-//            }
-//        }else {
-//            shoppingRecyclerView.onValidationLastTodoItem {
-//                todoListAdapter.notifyAllOnDataSetChanged()
-//            }
-        }
-    }
-}
-
-interface UserActionOnList {
-    fun updateAllOnValidation(position: Int)
 }
 

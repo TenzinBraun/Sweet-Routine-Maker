@@ -54,10 +54,21 @@ data class ActivityTodo(
 //classe Lorsque l'on choisit une liste
 @Keep
 data class TodoList(
-    val listLabel: String,
-    val listBase64: String?,
-    val items: List<Options>?
-): Serializable
+    var listLabel: String?,
+    var listBase64: String?,
+    var items: List<Options>?
+): Serializable {
+    constructor(key: String, hashMap: HashMap<String, Any>): this(null, null, null) {
+        listLabel = hashMap["listLabel"] as String?
+        listBase64 = hashMap["listBase64"] as String?
+
+        val test = (hashMap["items"] as ArrayList<HashMap<String, String>>?)
+
+        test.let {
+            items = ArrayList()
+        }
+    }
+}
 
 enum class RESTRICTIONS(restriction: Int): Serializable {
     RESTRICTED(0),

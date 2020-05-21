@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.iutbourg.sweetroutinemaker.R
@@ -28,7 +27,7 @@ class ActivityListFragment : Fragment(), ActivityClickListener, CreationItemHand
     private lateinit var activityListViewModel: ActivityListViewModel
     private lateinit var activityListAdapter: ActivityListAdapter
     private lateinit var activityTodoList: ListActivityTodo
-    private var itemClickedPosition = 0
+    private var childSelectedIndex = 0
 
 
     override fun onCreateView(
@@ -39,7 +38,7 @@ class ActivityListFragment : Fragment(), ActivityClickListener, CreationItemHand
         arguments?.let {
             // TODO remove when all good
             //activityTodoList = it.getSerializable("activities") as ListActivityTodo
-            itemClickedPosition = it.getSerializable("position") as Int
+            childSelectedIndex = it.getSerializable("position") as Int
             /*activityTodoList.activities!!.add(ActivityTodo(null, "Courses", ArrayList()))
             activityTodoList.activities!!.add(ActivityTodo(null, "Peinture", ArrayList()))*/
 
@@ -63,7 +62,7 @@ class ActivityListFragment : Fragment(), ActivityClickListener, CreationItemHand
             FirebaseManager.firebaseInstance.database.reference
                 .child(PreferencesUtils.getString("userKey", "", requireContext())!!)
                 .child("children")
-                .child(itemClickedPosition.toString())
+                .child(childSelectedIndex.toString())
                 .child("activities")
             ).observe(viewLifecycleOwner, Observer {
             it.let {
@@ -95,7 +94,7 @@ class ActivityListFragment : Fragment(), ActivityClickListener, CreationItemHand
         val nodes = FirebaseManager.firebaseInstance.database.reference
             .child(PreferencesUtils.getString("userKey", "", requireContext())!!)
             .child("children")
-            .child(itemClickedPosition.toString())
+            .child(childSelectedIndex.toString())
             .child("activities")
 
         activityListViewModel.addActivitiesForChild(
@@ -107,7 +106,7 @@ class ActivityListFragment : Fragment(), ActivityClickListener, CreationItemHand
     override fun onActivityClick(todoList: ArrayList<TodoList>, position: Int) {
         findNavController().navigate(
             R.id.action_activityListFragment_to_activityTodoListFragment,
-            bundleOf("todoList" to todoList, "position" to position)
+            bundleOf("todoList" to todoList, "childSelectedIndex" to childSelectedIndex, "activityIndex" to position)
         )
     }
 

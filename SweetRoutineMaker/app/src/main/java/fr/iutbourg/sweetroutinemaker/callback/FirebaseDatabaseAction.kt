@@ -10,6 +10,8 @@ interface FirebaseDatabaseAction<Model> {
     fun delete(model: Model, nodes: DatabaseReference)
     fun add(model: Model, nodes: DatabaseReference)
     fun getActivitiesForChild(nodes: DatabaseReference, viewModelScope: CoroutineScope): LiveData<Model>
+    fun getTodoListForActivities(nodes: DatabaseReference, viewModelScope: CoroutineScope): LiveData<Model>
+    fun getTodo(nodes: DatabaseReference, viewModelScope: CoroutineScope): LiveData<Model>
 
     companion object Instance{
         fun <T> firebaseContext(): FirebaseRepository<T> {

@@ -18,7 +18,6 @@ import fr.iutbourg.sweetroutinemaker.data.model.PictureTodo
 import fr.iutbourg.sweetroutinemaker.data.model.User
 import fr.iutbourg.sweetroutinemaker.data.networking.FirebaseManager
 import fr.iutbourg.sweetroutinemaker.data.utils.PreferencesUtils
-import fr.iutbourg.sweetroutinemaker.extension.GenericList
 import fr.iutbourg.sweetroutinemaker.extension.addElement
 import fr.iutbourg.sweetroutinemaker.extension.toBase64
 import fr.iutbourg.sweetroutinemaker.ui.widget.TagAddDialog
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navController = findNavController(R.id.appFragmentContainer)
         val bundle = Bundle()
         if (currentUser.children == null) {
-            currentUser.children = GenericList(ChildProfile::class.java)
+            currentUser.children = ArrayList()
             /*currentUser.childProfile?.add(ChildProfile(null, "Louis", null))
             currentUser.childProfile?.add(ChildProfile(null, "Hugo", null))*/
         }

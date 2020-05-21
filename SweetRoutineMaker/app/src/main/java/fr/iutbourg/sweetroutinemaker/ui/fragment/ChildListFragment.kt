@@ -84,13 +84,13 @@ class ChildListFragment : Fragment(), ChildClickListener, CreationItemHandler {
         )
     }
 
-    override fun onChildClickListener(activityTodo: ListActivityTodo, childPosition: Int) {
+    override fun onChildClickListener(activityTodo: ListActivityTodo, childIndex: Int) {
         findNavController().navigate(R.id.action_childListFragment_to_activityListFragment,
-            bundleOf("activities" to activityTodo, "position" to childPosition))
+            bundleOf("activities" to activityTodo, "position" to childIndex))
     }
 
 }
 
 interface ChildClickListener {
-    fun onChildClickListener(activityTodo: ListActivityTodo, childPosition: Int)
+    fun onChildClickListener(activityTodo: ListActivityTodo, childIndex: Int)
 }

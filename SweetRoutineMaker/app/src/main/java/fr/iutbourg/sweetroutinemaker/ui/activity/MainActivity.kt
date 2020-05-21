@@ -23,7 +23,6 @@ import fr.iutbourg.sweetroutinemaker.extension.toBase64
 import fr.iutbourg.sweetroutinemaker.ui.widget.TagAddDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, TagListHandler {
 
     private val firebaseReference = FirebaseManager.firebaseInstance.database.reference

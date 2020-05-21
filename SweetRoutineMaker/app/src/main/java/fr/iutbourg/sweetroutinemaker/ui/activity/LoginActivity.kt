@@ -11,12 +11,10 @@ import androidx.lifecycle.observe
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import fr.iutbourg.sweetroutinemaker.R
-import fr.iutbourg.sweetroutinemaker.callback.FirebaseDatabaseAction
 import fr.iutbourg.sweetroutinemaker.data.model.User
 import fr.iutbourg.sweetroutinemaker.data.networking.FirebaseManager
 import fr.iutbourg.sweetroutinemaker.ui.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.login_activity.*
-import kotlinx.android.synthetic.main.sign_up_activity.*
 
 const val REQUEST_CODE = 4500
 

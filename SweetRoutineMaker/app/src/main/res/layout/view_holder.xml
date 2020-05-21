@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn=".MainActivity">
+
+    <TextView
+        android:id="@+id/sectionName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:textSize="22sp"/>
+
+    <RelativeLayout
+        android:id="@+id/sectionNameSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/sectionName"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#FF0000"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/itemRecycler"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/sectionName"
+        android:padding="16dp"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:id="@+id/sectionEndSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/itemRecycler"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#FF0000"/>
+
+
+</RelativeLayout>

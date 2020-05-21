@@ -68,6 +68,10 @@ class SignUpActivity: AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        startActivity(Intent(this, LoginActivity::class.java))
+    }
+
     /*
 
     private fun signUpUser() {

@@ -9,7 +9,7 @@ interface FirebaseDatabaseAction<Model> {
     fun edit(model: Model, nodes: DatabaseReference)
     fun delete(model: Model, nodes: DatabaseReference)
     fun add(model: Model, nodes: DatabaseReference)
-    fun getWithQuery(model: Model, nodes: DatabaseReference, orderBy: String, equalTo: String, viewModelScope: CoroutineScope): LiveData<Model>
+    fun getActivitiesForChild(nodes: DatabaseReference, viewModelScope: CoroutineScope): LiveData<Model>
 
     companion object Instance{
         fun <T> firebaseContext(): FirebaseRepository<T> {

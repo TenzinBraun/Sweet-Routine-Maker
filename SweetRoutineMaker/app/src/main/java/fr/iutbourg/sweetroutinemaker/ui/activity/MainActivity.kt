@@ -13,10 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
 import fr.iutbourg.sweetroutinemaker.R
+import fr.iutbourg.sweetroutinemaker.data.model.ChildProfile
 import fr.iutbourg.sweetroutinemaker.data.model.PictureTodo
 import fr.iutbourg.sweetroutinemaker.data.model.User
 import fr.iutbourg.sweetroutinemaker.data.networking.FirebaseManager
 import fr.iutbourg.sweetroutinemaker.data.utils.PreferencesUtils
+import fr.iutbourg.sweetroutinemaker.extension.GenericList
 import fr.iutbourg.sweetroutinemaker.extension.addElement
 import fr.iutbourg.sweetroutinemaker.extension.toBase64
 import fr.iutbourg.sweetroutinemaker.ui.widget.TagAddDialog
@@ -36,7 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navController = findNavController(R.id.appFragmentContainer)
         val bundle = Bundle()
         if (currentUser.children == null) {
-            currentUser.children = ArrayList()
+            currentUser.children = GenericList(ChildProfile::class.java)
             /*currentUser.childProfile?.add(ChildProfile(null, "Louis", null))
             currentUser.childProfile?.add(ChildProfile(null, "Hugo", null))*/
         }

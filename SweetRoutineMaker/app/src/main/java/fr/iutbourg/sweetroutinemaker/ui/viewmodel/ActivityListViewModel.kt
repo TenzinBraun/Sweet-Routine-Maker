@@ -19,8 +19,8 @@ class ActivityListViewModel(
     fun addActivitiesForChild(activities: List<ActivityTodo> , nodes: DatabaseReference)
             = firebaseRepository.add(activities, nodes)
 
-    fun getChildActivities(activities: List<ActivityTodo>, nodes: DatabaseReference, orderBy: String, equalTo: String)
-    = firebaseRepository.getWithQuery(activities, nodes, orderBy, equalTo, viewModelScope)
+    fun getChildActivities(nodes: DatabaseReference)
+    = firebaseRepository.getActivitiesForChild(nodes, viewModelScope)
 
 
     companion object Factory : ViewModelProvider.Factory {

@@ -9,29 +9,35 @@ import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.iutbourg.sweetroutinemaker.R
+import fr.iutbourg.sweetroutinemaker.callback.CreationItemHandler
 import fr.iutbourg.sweetroutinemaker.data.model.ListActivityTodo
 import fr.iutbourg.sweetroutinemaker.data.model.Options
 import fr.iutbourg.sweetroutinemaker.data.model.TodoList
+import fr.iutbourg.sweetroutinemaker.data.networking.FirebaseManager
+import fr.iutbourg.sweetroutinemaker.data.utils.PreferencesUtils
 import fr.iutbourg.sweetroutinemaker.extension.addElement
 import fr.iutbourg.sweetroutinemaker.ui.adapter.ActivityTodoListAdapter
 import fr.iutbourg.sweetroutinemaker.ui.viewmodel.ActivityTodoListViewModel
 import fr.iutbourg.sweetroutinemaker.ui.viewmodel.TodoListViewModel
+import fr.iutbourg.sweetroutinemaker.ui.widget.InputDialog
 import kotlinx.android.synthetic.main.activity_todolist_fragment.view.*
 
 
-class ActivityTodoListFragment : Fragment(), ActivityTodoClickListener {
+class ActivityTodoListFragment : Fragment(), ActivityTodoClickListener, CreationItemHandler {
 
     private lateinit var activityTodoListViewModel: ActivityTodoListViewModel
     private lateinit var activityTodoListAdapter: ActivityTodoListAdapter
     private lateinit var todoList: List<TodoList>
+    private var itemClickedPosition: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val args = arguments
-        args?.let {
+
+        arguments?.let {
             todoList = it.getSerializable("todoList") as ArrayList<TodoList>
+            itemClickedPosition = it.getSerializable("position") as Int
             todoList.addElement(TodoList("TODO 1", null, ArrayList()))
         }
         activity?.run {
@@ -61,6 +67,26 @@ class ActivityTodoListFragment : Fragment(), ActivityTodoClickListener {
     override fun onActivityTodoClickListener(items: List<Options>) {
         findNavController().navigate(R.id.action_activityTodoListFragment_to_todoListFragment,
             bundleOf("options" to items))
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.add_menu_btn) {
+            InputDialog(this).show() //call CreateItemFromString (callback)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun createItemFromString(name: String) {
+        todoList.addElement(TodoList(name, null, ArrayList()))
+        val nodes = FirebaseManager.firebaseInstance.database.reference
+            .child(PreferencesUtils.getString("userKey", "", requireContext())!!)
+            .child("children")
+            .child(itemClickedPosition.toString())
+            .child("activities")
+            .child(itemClickedPosition.toString())
+            .child("activityTodoList")
+
+        activityTodoListViewModel.addActivityTodo(todoList, nodes)
     }
 
 }

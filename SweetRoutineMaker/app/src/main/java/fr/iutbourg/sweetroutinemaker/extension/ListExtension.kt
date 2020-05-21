@@ -45,5 +45,7 @@ fun <Model, Holder : BaseItemViewHolder<Model>> List<Model>.initRecyclerView(ite
     }
 }
 
+class GenericList<T>(val genericType: Class<T>) : ArrayList<T>()
+
 
 

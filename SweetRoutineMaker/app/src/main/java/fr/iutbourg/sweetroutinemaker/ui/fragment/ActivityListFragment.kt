@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.iutbourg.sweetroutinemaker.R
@@ -33,12 +35,13 @@ class ActivityListFragment : Fragment(), ActivityClickListener, CreationItemHand
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val arg = arguments
+        activityTodoList = ListActivityTodo(ArrayList())
         arguments?.let {
-            activityTodoList = it.getSerializable("activities") as ListActivityTodo
+            // TODO remove when all good
+            //activityTodoList = it.getSerializable("activities") as ListActivityTodo
             itemClickedPosition = it.getSerializable("position") as Int
-            activityTodoList.activities!!.add(ActivityTodo(null, "Courses", ArrayList()))
-            activityTodoList.activities!!.add(ActivityTodo(null, "Peinture", ArrayList()))
+            /*activityTodoList.activities!!.add(ActivityTodo(null, "Courses", ArrayList()))
+            activityTodoList.activities!!.add(ActivityTodo(null, "Peinture", ArrayList()))*/
 
         }
         activity?.run {
@@ -56,7 +59,17 @@ class ActivityListFragment : Fragment(), ActivityClickListener, CreationItemHand
 
         activityListAdapter = ActivityListAdapter(activityTodoList.activities!!, this)
 
-        //activityListViewModel.getChildActivities()
+        activityListViewModel.getChildActivities(
+            FirebaseManager.firebaseInstance.database.reference
+                .child(PreferencesUtils.getString("userKey", "", requireContext())!!)
+                .child("children")
+                .child(itemClickedPosition.toString())
+                .child("activities")
+            ).observe(viewLifecycleOwner, Observer {
+            it.let {
+                activityListAdapter.submitList(it)
+            }
+        })
 
         view.recycler_view_activity.apply {
             adapter = activityListAdapter
@@ -76,12 +89,6 @@ class ActivityListFragment : Fragment(), ActivityClickListener, CreationItemHand
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onActivityClick(view: View, todoList: ArrayList<TodoList>) {
-        findNavController().navigate(
-            R.id.action_activityListFragment_to_activityTodoListFragment,
-            bundleOf("todoList" to todoList)
-        )
-    }
 
     override fun createItemFromString(name: String) {
         activityTodoList.activities!!.add(ActivityTodo(null, name, ArrayList()))
@@ -97,8 +104,15 @@ class ActivityListFragment : Fragment(), ActivityClickListener, CreationItemHand
         )
     }
 
+    override fun onActivityClick(todoList: ArrayList<TodoList>, position: Int) {
+        findNavController().navigate(
+            R.id.action_activityListFragment_to_activityTodoListFragment,
+            bundleOf("todoList" to todoList, "position" to position)
+        )
+    }
+
 }
 
 interface ActivityClickListener {
-    fun onActivityClick(view: View, todoList: ArrayList<TodoList>)
+    fun onActivityClick(todoList: ArrayList<TodoList>, position: Int)
 }

@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import fr.iutbourg.sweetroutinemaker.ui.adapter.viewholder.SectionViewHolder
 import fr.iutbourg.sweetroutinemaker.data.model.SectionItem
+import java.lang.Exception
 
 class SectionAdapter : RecyclerView.Adapter<SectionViewHolder>() {
 
@@ -15,10 +16,22 @@ class SectionAdapter : RecyclerView.Adapter<SectionViewHolder>() {
     override fun getItemCount(): Int = itemList.size
 
     override fun onBindViewHolder(holder: SectionViewHolder, position: Int) {
-        holder.bindView(itemList[position])
+        try {
+            val item = itemList[position]
+            holder.bindView(item)
+        }catch (e: Exception){
+            try {
+                val item = (itemList[position] as HashMap<String, ArrayList<String>>)["listItem"]
+                holder.bindView(SectionItem(item!!))
+            }
+            catch (e: Exception){
+                e.printStackTrace()
+            }
+        }
+
     }
 
-    fun submitList(sections: MutableList<SectionItem>) {
+    fun submitList(sections: List<SectionItem>) {
         itemList = sections
         notifyDataSetChanged()
     }

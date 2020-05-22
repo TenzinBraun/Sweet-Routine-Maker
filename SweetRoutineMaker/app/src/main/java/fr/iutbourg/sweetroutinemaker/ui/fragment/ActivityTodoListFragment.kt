@@ -154,7 +154,7 @@ class ActivityTodoListFragment : Fragment(), ActivityTodoClickListener, Creation
         val itemList = List(value) {
             sectionName
         }
-        val section = SectionItem("sectionName", itemList)
+        val section = SectionItem(itemList as ArrayList<String>)
         sections.add(section)
         if (shouldRecreateItSelf) {
             launchEditingListMode(null)

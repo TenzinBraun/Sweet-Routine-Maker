@@ -15,7 +15,7 @@ class SectionViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private var adapter = SectionItemAdapter()
 
     fun bindView(item: SectionItem) {
-        itemView.sectionName.text = item.tag
+//        itemView.sectionName.text = item.listItem.
         itemView.itemRecycler.apply {
             adapter = this@SectionViewHolder.adapter
             layoutManager = LinearLayoutManager(context)

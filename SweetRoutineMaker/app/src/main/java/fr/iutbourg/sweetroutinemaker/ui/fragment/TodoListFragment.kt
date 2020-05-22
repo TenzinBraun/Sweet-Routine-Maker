@@ -21,6 +21,7 @@ import fr.iutbourg.sweetroutinemaker.ui.adapter.TodoListAdapter
 import fr.iutbourg.sweetroutinemaker.ui.viewmodel.TodoListViewModel
 import fr.iutbourg.sweetroutinemaker.data.model.SectionItem
 import kotlinx.android.synthetic.main.todolist_fragment.*
+import java.lang.Exception
 
 /**
  * A simple [Fragment] subclass.
@@ -98,7 +99,11 @@ class TodoListFragment : Fragment() {
                 layoutManager = LinearLayoutManager(this@TodoListFragment.requireContext())
                 setHasFixedSize(true)
             }
-            sectionAdapter.submitList(sections!!)
+            try {
+                sectionAdapter.submitList(sections!!)
+            }catch (e: Exception){
+            }
+
         }
     }
 

@@ -5,4 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_tag">Entrez un Tag pour vos photos</string>
     <string name="validate_tag">Valider</string>
+    <string name="add_name_liste">Entrer un nom pour la liste</string>
+    <string name="validate_new_liste">Valider</string>
+    <string name="title_create_liste">Créer votre Liste de Tâches à faire</string>
 </resources>

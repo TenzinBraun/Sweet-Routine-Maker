@@ -8,21 +8,17 @@ import fr.iutbourg.sweetroutinemaker.callback.SectionHandler
 import kotlinx.android.synthetic.main.dialog_add_section.*
 
 
-class AddSectionDialog(context: FragmentActivity, private val callback: SectionHandler) : BaseDialog(context){
+class AddSectionDialog(context: FragmentActivity, private val callback: SectionHandler) :
+    BaseDialog(context) {
 
 
     private var tags = mutableListOf<String>()
+    private var shouldRecreateItSelf = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         this.window?.setBackgroundDrawableResource(android.R.color.transparent)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_add_section)
-        tags.add("Entrée")
-        tags.add("Dessert")
-        tags.add("Traiteur")
-        tags.add("Plat Chaud")
-        tags.add("Plage")
-        tags.add("Montagne")
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             context,
             android.R.layout.simple_spinner_item,
@@ -31,8 +27,16 @@ class AddSectionDialog(context: FragmentActivity, private val callback: SectionH
         spinner.adapter = adapter
         numberPicker.maxValue = 1000
         numberPicker.minValue = 1
+        toggleRecreateSection.setOnCheckedChangeListener { _, isChecked ->
+            shouldRecreateItSelf = isChecked
+        }
+
         validateSection.setOnClickListener {
-            callback.createSection(spinner.selectedItem.toString(), numberPicker.value)
+            callback.createSection(
+                "spinner.selectedItem.toString()",
+                numberPicker.value,
+                shouldRecreateItSelf
+            )
             dismiss()
         }
     }

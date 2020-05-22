@@ -88,7 +88,9 @@ class UserRepositoryImpl(
                 override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    data.postValue(getUserFirebase(snapshot.value as Map<String, HashMap<String, Any>>, user))
+                    snapshot.value?.let {
+                        data.postValue(getUserFirebase(it as Map<String, HashMap<String, Any>>, user))
+                    }
                 }
 
             })

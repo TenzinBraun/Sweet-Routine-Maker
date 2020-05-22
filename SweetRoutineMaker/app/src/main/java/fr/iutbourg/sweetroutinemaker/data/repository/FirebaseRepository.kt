@@ -38,17 +38,20 @@ class FirebaseRepository<Model> : FirebaseDatabaseAction<Model> {
                 }
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    data.postValue(getChildActivities(snapshot.value as ArrayList<HashMap<String, Any>>) as Model)
+                    snapshot.value?.let {
+                        data.postValue(getChildActivities(it as ArrayList<HashMap<String, Any>>) as Model)
+                    }
+
                 }
             })
         }
         return data
     }
-    private fun getChildActivities(array: ArrayList<HashMap<String, Any>>): List<ActivityTodo> {
-        var act = mutableListOf<ActivityTodo>()
+    private fun getChildActivities(array: ArrayList<HashMap<String, Any>>?): List<ActivityTodo> {
+        val act = mutableListOf<ActivityTodo>()
 
         array.let {
-            it.forEach { hashMap ->
+            it?.forEach { hashMap ->
                 act.add(ActivityTodo(hashMap.keys.first(), hashMap))
             }
         }
@@ -69,7 +72,9 @@ class FirebaseRepository<Model> : FirebaseDatabaseAction<Model> {
                 }
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    data.postValue(getActivityTodoList(snapshot.value as ArrayList<HashMap<String, Any>>) as Model)
+                    snapshot.value?.let {
+                        data.postValue(getActivityTodoList(it as ArrayList<HashMap<String, Any>>) as Model)
+                    }
                 }
 
             })

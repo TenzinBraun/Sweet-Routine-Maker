@@ -14,13 +14,6 @@ class ActivityTodoListAdapter(
     private var clickListener: ActivityTodoClickListener
 ) : BaseItemAdapter<TodoList, ActivityTodoListViewHolder>() {
 
-
-
-    override fun submitList(list: List<TodoList>) {
-        this.itemList = list
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityTodoListViewHolder = ActivityTodoListViewHolder.create(parent)
 
     override fun getItemCount(): Int = itemList.size
@@ -32,11 +25,11 @@ class ActivityTodoListAdapter(
             holder.itemView.apply {
                 activity_todo_name.text = todoList.listLabel
                 Glide.with(this)
-                    .load(todo.listBase64)
+                    .load(todoList.listBase64)
                     .into(activity_todo_image_view)
 
                 setOnClickListener {
-                    clickListener.onActivityTodoClickListener(todo.items!!, position)
+                    clickListener.onActivityTodoClickListener(todoList, position)
                 }
             }
         }

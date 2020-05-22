@@ -1,4 +1,4 @@
-package fr.iutbourg.testcustomrecyclerview
+package fr.iutbourg.sweetroutinemaker.data.model
 
 import android.graphics.Color
 

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.iutbourg.sweetroutinemaker.R
-import fr.iutbourg.testcustomrecyclerview.SectionItem
+import fr.iutbourg.sweetroutinemaker.data.model.SectionItem
 import fr.iutbourg.testcustomrecyclerview.SectionItemAdapter
 import kotlinx.android.synthetic.main.view_holder.view.*
 

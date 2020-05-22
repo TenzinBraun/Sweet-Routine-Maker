@@ -3,7 +3,7 @@ package fr.iutbourg.sweetroutinemaker.ui.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import fr.iutbourg.sweetroutinemaker.ui.adapter.viewholder.SectionViewHolder
-import fr.iutbourg.testcustomrecyclerview.SectionItem
+import fr.iutbourg.sweetroutinemaker.data.model.SectionItem
 
 class SectionAdapter : RecyclerView.Adapter<SectionViewHolder>() {
 

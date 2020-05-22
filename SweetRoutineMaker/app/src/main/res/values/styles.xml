@@ -47,4 +47,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="MainButtonAction">
+        <item name="android:paddingStart">40dp</item>
+        <item name="android:paddingEnd">40dp</item>
+        <item name="android:background">@drawable/background_button_action</item>
+    </style>
+
 </resources>

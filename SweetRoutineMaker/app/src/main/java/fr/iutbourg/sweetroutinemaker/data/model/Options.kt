@@ -55,11 +55,15 @@ data class ActivityTodo(
 data class TodoList(
     var listLabel: String?,
     var listBase64: String?,
-    var items: List<Options>?
+    var items: List<Options>?,
+    var editedList: Boolean? = false,
+    var sections: ArrayList<SectionItem>?
 ): Serializable {
-    constructor(key: String, hashMap: HashMap<String, Any>): this(null, null, null) {
+    constructor(key: String, hashMap: HashMap<String, Any>): this(null, null, null, false, null) {
         listLabel = hashMap["listLabel"] as String?
         listBase64 = hashMap["listBase64"] as String?
+        editedList = hashMap["editedList"] as Boolean?
+        sections = hashMap["sections"] as ArrayList<SectionItem>?
 
         val test = (hashMap["items"] as ArrayList<HashMap<String, String>>?)
 

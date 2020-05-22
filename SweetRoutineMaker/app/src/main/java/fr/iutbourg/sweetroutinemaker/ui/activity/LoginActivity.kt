@@ -55,9 +55,13 @@ class LoginActivity: AppCompatActivity() {
         if (currentUser != null) {
             if (currentUser.isEmailVerified) {
                 userViewModel.getDataOfUser(User(uid = currentUser.uid)).observe(this) {
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("user", it) // or send childrenList instead
-                    startActivity(intent)
+                    it?.let {
+                        val intent = Intent(this, MainActivity::class.java)
+                        val userWithoutPicture = it
+                        userWithoutPicture.pictures = ArrayList()
+                        intent.putExtra("user", userWithoutPicture)
+                        startActivity(intent)
+                    }
                 }
             } else {
                 Toast.makeText(baseContext, "Please verify your email", Toast.LENGTH_SHORT).show()

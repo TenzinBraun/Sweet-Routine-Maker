@@ -28,14 +28,11 @@ class TagAddDialog(activity: MainActivity) : BaseDialog(activity) {
         addTagToList.setOnClickListener {
             addtTagEditText.text.apply {
                 trim()
-
                 val tagEdited = toString()
-
                 tagEdited.toLowerCase(Locale.ROOT)
-                if (list.contains(tagEdited))
+                if (!list.contains(tagEdited))
                     list.addElement(tagEdited)
 
-                addTagAdapter.submitList(list = list)
                 addTagValidate.show()
             }
         }

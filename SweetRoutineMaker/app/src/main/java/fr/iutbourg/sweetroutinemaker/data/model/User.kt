@@ -22,9 +22,9 @@ data class User (
         uid = hashMap["uid"] as String
         email = hashMap["email"] as String
 
-        val childList: ArrayList<HashMap<String, String>>?  = (hashMap["children"] as ArrayList<HashMap<String, String>>)
-        val pictureList: ArrayList<HashMap<String, String>>? = (hashMap["pictures"] as ArrayList<HashMap<String, String>>)
-        val tagList: ArrayList<String>? = (hashMap["tags"] as ArrayList<String>)
+        val childList: ArrayList<HashMap<String, String>>?  = (hashMap["children"] as ArrayList<HashMap<String, String>>?)
+        val pictureList: ArrayList<HashMap<String, String>>? = (hashMap["pictures"] as ArrayList<HashMap<String, String>>?)
+        val tagList: ArrayList<String>? = (hashMap["tags"] as ArrayList<String>?)
 
         childList?.let {
             children = ArrayList()

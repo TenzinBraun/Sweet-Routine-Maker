@@ -18,9 +18,11 @@ class TodoListAdapter : BaseItemAdapter<Options, ItemTodoViewHolder>() {
 
         holder.bind(option) { opt ->
             holder.itemView.apply {
-                Glide.with(this)
-                    .load(opt.todoItemB64)
-                    .into(todo_image_view)
+                opt.todoItemB64?.let {
+                    Glide.with(this)
+                        .load(it)
+                        .into(todo_image_view)
+                }
             }
         }
     }

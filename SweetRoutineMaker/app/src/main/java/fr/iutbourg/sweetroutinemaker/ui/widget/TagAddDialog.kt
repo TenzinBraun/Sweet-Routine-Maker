@@ -30,8 +30,10 @@ class TagAddDialog(activity: MainActivity) : BaseDialog(activity) {
                 trim()
                 val tagEdited = toString()
                 tagEdited.toLowerCase(Locale.ROOT)
-                if (!list.contains(tagEdited))
+                if (!list.contains(tagEdited)){
                     list.addElement(tagEdited)
+                    addTagAdapter.submitList(list)
+                }
 
                 addTagValidate.show()
             }

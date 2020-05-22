@@ -81,10 +81,10 @@ class FirebaseRepository<Model> : FirebaseDatabaseAction<Model> {
         }
         return data
     }
-   private fun getActivityTodoList(array: ArrayList<HashMap<String, Any>>): List<TodoList> {
+   private fun getActivityTodoList(array: ArrayList<HashMap<String, Any>>?): List<TodoList> {
        var actTodo = mutableListOf<TodoList>()
 
-       array.let {
+       array?.let {
            it.forEach { hashMap ->
                actTodo.add(TodoList(hashMap.keys.first(), hashMap))
            }
@@ -106,18 +106,19 @@ class FirebaseRepository<Model> : FirebaseDatabaseAction<Model> {
                 }
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    data.postValue(getTodos(snapshot.value as ArrayList<HashMap<String, Any>>) as Model)
+                    if(snapshot.value is ArrayList<*>?) {
+                        data.postValue(getTodos(snapshot.value as ArrayList<HashMap<String, Any>>?) as Model)
+                    }
                 }
-
             })
         }
         return data
     }
 
-    private fun getTodos(array: ArrayList<HashMap<String, Any>>): List<Options> {
+    private fun getTodos(array: ArrayList<HashMap<String, Any>>?): List<Options> {
         val todos = mutableListOf<Options>()
 
-        array.let {
+        array?.let {
             it.forEach { hashMap ->
                 todos.add(Options(hashMap.keys.first(), hashMap))
             }
@@ -128,3 +129,5 @@ class FirebaseRepository<Model> : FirebaseDatabaseAction<Model> {
 
 
 }
+
+class Collections<M>: ArrayList<M>(), Collection<M>

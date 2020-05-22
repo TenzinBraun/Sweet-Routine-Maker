@@ -27,18 +27,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:visibility="gone"
             android:text="Mode Editeur "
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/dialog_input_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/isFreeEditing"
             android:hint="@string/add_name_liste"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
     </RelativeLayout>
 
 
@@ -50,7 +50,7 @@
         android:layout_below="@id/containerAction"
         android:layout_centerHorizontal="true"
         android:text="@string/validate_new_liste"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
 
 </RelativeLayout>

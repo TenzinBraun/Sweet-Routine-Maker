@@ -28,7 +28,6 @@ class SectionAdapter : RecyclerView.Adapter<SectionViewHolder>() {
                 e.printStackTrace()
             }
         }
-
     }
 
     fun submitList(sections: List<SectionItem>) {

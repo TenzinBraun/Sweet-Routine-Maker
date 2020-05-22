@@ -3,11 +3,11 @@ package fr.iutbourg.sweetroutinemaker.data.model
 import androidx.annotation.Keep
 import java.io.Serializable
 
-
+@Keep
 data class PictureTodo(
     var itemBase64: String,
     var tags: List<String>
-)
+): Serializable
 
 @Keep
 data class Options(
@@ -20,16 +20,7 @@ data class Options(
 @Keep
 data class ListActivityTodo(
     var activities: ArrayList<ActivityTodo>?
-): Serializable {
-    constructor(key: String, hashMap: HashMap<String, Any>): this(null) {
-
-        val test = (hashMap["activities"]  as ArrayList<HashMap<String, String>>)
-
-        test.forEach {
-            activities!!.add(ActivityTodo(null, it["name"]!!, null))
-        }
-    }
-}
+): Serializable
 
 //Classe lorsque l'on choisit une activité
 @Keep

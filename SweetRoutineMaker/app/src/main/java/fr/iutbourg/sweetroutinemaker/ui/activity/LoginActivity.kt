@@ -56,7 +56,7 @@ class LoginActivity: AppCompatActivity() {
             if (currentUser.isEmailVerified) {
                 userViewModel.getDataOfUser(User(uid = currentUser.uid)).observe(this) {
                     val intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("user", it) // or send childrenList instead
+                    intent.putExtra("user", it) 
                     startActivity(intent)
                 }
             } else {

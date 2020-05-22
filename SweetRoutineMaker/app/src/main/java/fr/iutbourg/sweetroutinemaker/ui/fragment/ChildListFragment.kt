@@ -31,8 +31,7 @@ class ChildListFragment : Fragment(), ChildClickListener, CreationItemHandler {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val args = arguments
-        args?.let {
+        arguments?.let {
             childList = it.getSerializable("childrenList") as ArrayList<ChildProfile>
 
             childList.forEach{ child -> // on vérifie si le tableau d'activité est créer pour chaque enfant

@@ -29,7 +29,6 @@ class ActivityTodoListFragment : Fragment(), ActivityTodoClickListener, Creation
     private lateinit var todoList: List<TodoList>
     private var childSelectedIndex: Int = 0
     private var activityIndex: Int = 0
-    private var activityTodoSelectedIndex: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,7 +84,7 @@ class ActivityTodoListFragment : Fragment(), ActivityTodoClickListener, Creation
                 "options" to items,
                 "childSelectedIndex" to childSelectedIndex,
                 "activityIndex" to activityIndex,
-                "activityTodoSelectedIndex" to activityTodoSelectedIndex
+                "activityTodoSelectedIndex" to position
             )
         )
     }

@@ -33,7 +33,7 @@ data class User (
             }
         }
 
-        pictureList?.let {
+       pictureList?.let {
             pictures = ArrayList()
             it.forEach { picture ->
                 val tempTagsOfPictures = ArrayList<String>()

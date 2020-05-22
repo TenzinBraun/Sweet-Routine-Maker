@@ -5,16 +5,22 @@ import java.io.Serializable
 
 @Keep
 data class PictureTodo(
-    var itemBase64: String,
-    var tags: List<String>
+    var itemBase64: String?,
+    var tags: List<String>?
 ): Serializable
 
 @Keep
 data class Options(
-    val todoItemB64 : String?,
-    val todoItemLabel : String,
-    val isRestricted: RESTRICTIONS = RESTRICTIONS.FULL_CONTROL
-): Serializable
+    var todoItemB64 : String?,
+    var todoItemLabel : String?,
+    var isRestricted: RESTRICTIONS = RESTRICTIONS.FULL_CONTROL
+): Serializable {
+    constructor(key: String, hashMap: HashMap<String, Any>): this(null, null, RESTRICTIONS.FULL_CONTROL) {
+        todoItemB64  = hashMap["todoItemB64"] as String?
+        todoItemLabel  = hashMap["todoItemLabel"] as String?
+        isRestricted  = hashMap["isRestricted"] as RESTRICTIONS
+    }
+}
 
 //Classe la plus haute (Homescreen)
 @Keep

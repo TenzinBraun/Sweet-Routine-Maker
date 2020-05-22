@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.*
 import fr.iutbourg.sweetroutinemaker.callback.FirebaseDatabaseAction
 import fr.iutbourg.sweetroutinemaker.data.model.ActivityTodo
+import fr.iutbourg.sweetroutinemaker.data.model.Options
 import fr.iutbourg.sweetroutinemaker.data.model.TodoList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -100,8 +101,7 @@ class FirebaseRepository<Model> : FirebaseDatabaseAction<Model> {
                 }
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val smt = 0
-                    //data.postValue()
+                    data.postValue(getTodos(snapshot.value as ArrayList<HashMap<String, Any>>) as Model)
                 }
 
             })
@@ -109,8 +109,16 @@ class FirebaseRepository<Model> : FirebaseDatabaseAction<Model> {
         return data
     }
 
-    private fun getTodos() {
+    private fun getTodos(array: ArrayList<HashMap<String, Any>>): List<Options> {
+        val todos = mutableListOf<Options>()
 
+        array.let {
+            it.forEach { hashMap ->
+                todos.add(Options(hashMap.keys.first(), hashMap))
+            }
+        }
+
+        return todos
     }
 
 

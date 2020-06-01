@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "582445498678-2s7abt83g26gk2bqpgp8tq2ihs11ie0h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.iutbourg.sweetroutinemaker",
+            "certificate_hash": "fce7bd6528b517a12ded9f38446c72c5afd0e4fa"
+          }
+        },
+        {
           "client_id": "582445498678-n9pu6j06avdvnfjc1qpoatnce37mbjjn.apps.googleusercontent.com",
           "client_type": 3
         }
